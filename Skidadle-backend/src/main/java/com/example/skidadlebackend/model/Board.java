@@ -38,4 +38,10 @@ public class Board {
     public void set(int row, int col, char ch) {
         cells[row][col] = ch;
     }
+
+    public String getWordFromRange(Position start, Position end) {
+        // TODO: get word from range
+
+        return "";
+    }
 }
