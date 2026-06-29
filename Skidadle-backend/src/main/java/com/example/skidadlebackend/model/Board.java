@@ -15,10 +15,10 @@ public class Board {
     }
 
     public boolean isInside(int row, int col) {
-        if (row < 0 || row >= rows) return false;
-        if (col < 0 || col >= cols) return false;
+        boolean validRow = row >= 0 && row < rows;
+        boolean validCol = col >= 0 && col < cols;
 
-        return true;
+        return validRow && validCol;
     }
 
     public boolean isEmpty(int row, int col) {
