@@ -1,9 +1,15 @@
 package com.example.skidadlebackend.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 
 @Getter
 public class Board {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private final int rows;
     private final int cols;
     private final char[][] cells;
