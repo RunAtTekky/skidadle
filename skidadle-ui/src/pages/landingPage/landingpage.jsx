@@ -6,8 +6,43 @@ function LandingPage() {
       <h1 className="title">Skidadle</h1>
 
       <div className="setup-card">
-        <h2 className="card-title">Game Setup</h2>
+        <h2 className="card-title">GAME SETUP</h2>
+
+        <div className="divider"></div>
+
+        <div className="input-group">
+          <label className="label">Number of Rows</label>
+
+          <input
+            type="number"
+            className="input"
+            defaultValue={10}
+            min={5}
+            max={20}
+          />
+
+          <p className="hint">Min 5 - Max 20</p>
+        </div>
+
+        <div className="input-group">
+          <label className="label">Number of Columns</label>
+          
+
+          <input
+            type="number"
+            className="input"
+            defaultValue={10}
+            min={5}
+            max={20}
+          />
+
+          <p className="hint">Min 5 - Max 20</p>
+
+        </div>
+        
       </div>
+      <button>Play Offline</button>
+        <button>Play Online</button>
     </div>
   );
 }
