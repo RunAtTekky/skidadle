@@ -45,18 +45,9 @@ body {
   margin: 20px 0 30px;
 }
 
-
-
-.btn {
-  background-color: grey;
-  flex: 1;
-  height : 50px;
-}
-
 .button {
-   display: flex;
-  width: 520px; 
+  display: flex;
+  width: 520px;
   gap: 16px;
   margin-top: 20px;
 }
-

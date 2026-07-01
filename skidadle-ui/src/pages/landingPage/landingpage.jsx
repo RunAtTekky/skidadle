@@ -1,3 +1,4 @@
+import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
 import "./landingpage.css";
 
@@ -21,8 +22,8 @@ function LandingPage() {
         />
       </div>
       <div className="button">
-        <button className="btn">Play Offline</button>
-        <button className="btn">Play Online</button>
+        <Button>Play Offline</Button>
+        <Button>Play Online</Button>
       </div>
     </div>
   );
