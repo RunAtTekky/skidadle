@@ -1,3 +1,4 @@
+import TextInput from "../../components/TextInput/TextInput";
 import "./landingpage.css";
 
 function LandingPage() {
@@ -10,43 +11,20 @@ function LandingPage() {
 
         <div className="divider"></div>
 
-        <div className="input-group">
-          <label className="label">Number of Rows</label>
+        <TextInput label="Number of Rows" defaultValue={10} min={5} max={20} />
 
-          <input
-            type="number"
-            className="input"
-            defaultValue={10}
-            min={5}
-            max={20}
-          />
-
-          <p className="hint">Min 5 - Max 20</p>
-        </div>
-
-        <div className="input-group">
-          <label className="label">Number of Columns</label>
-          
-
-          <input
-            type="number"
-            className="input"
-            defaultValue={10}
-            min={5}
-            max={20}
-          />
-
-          <p className="hint">Min 5 - Max 20</p>
-
-        </div>
-        
-        </div>
-         <div className="button">
+        <TextInput
+          label="Number of Columns"
+          defaultValue={10}
+          min={5}
+          max={20}
+        />
+      </div>
+      <div className="button">
         <button className="btn">Play Offline</button>
         <button className="btn">Play Online</button>
-        </div>
-       
-        </div>
+      </div>
+    </div>
   );
 }
 
