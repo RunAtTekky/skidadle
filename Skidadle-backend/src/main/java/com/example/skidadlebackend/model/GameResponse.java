@@ -1,12 +1,15 @@
 package com.example.skidadlebackend.model;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
 
-@AllArgsConstructor
+@Value(staticConstructor = "of")
+@Builder
 public class GameResponse {
-    private boolean canPlace;
-    private CellRange horizontal;
-    private CellRange vertical;
-    private int score;
-    private String error;
+    String status;
+    boolean canPlace;
+    CellRange horizontal;
+    CellRange vertical;
+    int score;
+    String error;
 }
