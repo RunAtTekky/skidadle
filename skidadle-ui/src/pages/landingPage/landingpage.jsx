@@ -40,10 +40,13 @@ function LandingPage() {
 
         </div>
         
-      </div>
-      <button>Play Offline</button>
-        <button>Play Online</button>
-    </div>
+        </div>
+         <div className="button">
+        <button className="btn">Play Offline</button>
+        <button className="btn">Play Online</button>
+        </div>
+       
+        </div>
   );
 }
 
