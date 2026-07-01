@@ -8,7 +8,7 @@ import java.util.Set;
 public class DictionaryService {
     private static Set<String> possibleWords;
 
-    public static boolean isValidWord(String word) {
+    public boolean isValidWord(String word) {
         return possibleWords.contains(word);
     }
 }
