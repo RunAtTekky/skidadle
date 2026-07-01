@@ -3,7 +3,7 @@ package com.example.skidadlebackend.model;
 import lombok.Builder;
 import lombok.Value;
 
-@Value(staticConstructor = "of")
+@Value
 @Builder
 public class GameResponse {
     String status;
