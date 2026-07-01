@@ -1,6 +1,7 @@
 package com.example.skidadlebackend.controller;
 
 import com.example.skidadlebackend.model.GameResponse;
+import com.example.skidadlebackend.model.PlaceTileRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,15 +13,20 @@ public class GameController {
         return "Welcome to " + GAME_NAME;
     }
 
-    @GetMapping("/place-tile")
-    public GameResponse placeTile() {
+    @PostMapping("/place-tile")
+    public GameResponse placeTile(@RequestBody PlaceTileRequest placeTileRequest) {
         // TODO: Give actual placeTile response
+
+        int row = placeTileRequest.getRow();
+        int col = placeTileRequest.getCol();
+        char ch = placeTileRequest.getCh();
+
         return GameResponse.builder()
                 .status("Success")
                 .canPlace(true)
                 .horizontal(null)
                 .vertical(null)
-                .score(0)
+                .score(row + col)
                 .error("")
                 .build();
     }
