@@ -29,7 +29,7 @@ Users can play with someone over the internet.
 You can choose to play with friends or random people.
 
 ## Contributing
-Look at the [CONTRIBUTING.md](https://github.com/RunAtTekky/skidadle/blob/contributing/CONTRIBUTING.md)
+Look at the [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 ## Setup & Run
 

@@ -6,7 +6,7 @@ The aim is to collaborate and improve efficiency of the team.
 AI slop is not welcome, code is sacred.
 
 ## Setup
-[Check setup instructions here](https://github.com/RunAtTekky/skidadle/blob/main/README.md#setup--run)
+[Check setup instructions here](/README.md#setup--run)
 
 ## Pull Request Process
 - Nothing must be committed to main branch directly
