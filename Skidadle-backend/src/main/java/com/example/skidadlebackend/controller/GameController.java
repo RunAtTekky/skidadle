@@ -20,6 +20,7 @@ public class GameController {
         gameState = new GameState(initRequest.getRow(), initRequest.getCol());
 
         return InitResponse.builder()
+                .board(gameState.getBoard())
                 .user1(gameState.getUser1())
                 .user2(gameState.getUser2())
                 .build();
@@ -61,6 +62,11 @@ public class GameController {
                 .score(1)
                 .error("")
                 .build();
+    }
+
+    @PostMapping("/board")
+    public Board getBoard(@RequestParam int id) {
+        return gameState.getBoard();
     }
 
 }

@@ -5,16 +5,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Getter
 public class Board {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private static AtomicInteger idCounter = new AtomicInteger(1);
     private int id;
     private final int rows;
     private final int cols;
     private final char[][] cells;
 
     public Board(int rows, int cols) {
+        this.id = idCounter.getAndIncrement();
         this.rows = rows;
         this.cols = cols;
         this.cells = new char[rows][cols];

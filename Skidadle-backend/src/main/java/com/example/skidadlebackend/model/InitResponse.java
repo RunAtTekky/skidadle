@@ -6,6 +6,7 @@ import lombok.Value;
 @Value
 @Builder
 public class InitResponse {
+    Board board;
     User user1;
     User user2;
 }
