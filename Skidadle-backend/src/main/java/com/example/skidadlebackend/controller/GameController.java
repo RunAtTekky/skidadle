@@ -1,8 +1,6 @@
 package com.example.skidadlebackend.controller;
 
-import com.example.skidadlebackend.model.GameResponse;
-import com.example.skidadlebackend.model.GameState;
-import com.example.skidadlebackend.model.PlaceTileRequest;
+import com.example.skidadlebackend.model.*;
 import com.example.skidadlebackend.services.GameLogic;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +13,16 @@ public class GameController {
     public String hello() {
         final String GAME_NAME = "Skidadle";
         return "Welcome to " + GAME_NAME;
+    }
+
+    @PostMapping("/init")
+    public InitResponse initiateGame(@RequestBody InitRequest initRequest) {
+        gameState = new GameState(initRequest.getRow(), initRequest.getCol());
+
+        return InitResponse.builder()
+                .user1(gameState.getUser1())
+                .user2(gameState.getUser2())
+                .build();
     }
 
     @PostMapping("/place-tile")

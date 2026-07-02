@@ -11,8 +11,8 @@ public class GameState {
 
     public GameState(int rows, int cols) {
         board = new Board(rows, cols);
-        user1 = User.builder().build();
-        user2 = User.builder().build();
+        user1 = User.create(board.getId());
+        user2 = User.create(board.getId());
         isFirstTurn = true;
     }
 
