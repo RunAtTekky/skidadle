@@ -21,25 +21,36 @@ public class GameController {
     public GameResponse placeTile(@RequestBody PlaceTileRequest placeTileRequest) {
         // TODO: Give actual placeTile response
 
+        int id = placeTileRequest.getId();;
         int row = placeTileRequest.getRow();
         int col = placeTileRequest.getCol();
         char ch = placeTileRequest.getCh();
+
+        if (!GameLogic.isUserTurn(gameState, id)) {
+            return GameResponse.builder()
+                    .status("Failure")
+                    .error("Not users turn")
+                    .build();
+        }
 
         boolean isValid = GameLogic.validateCell(gameState, row, col, ch);
 
         if (!isValid) {
             return GameResponse.builder()
                     .status("Failure")
+                    .canPlace(false)
                     .error("Invalid cell")
                     .build();
         }
+
+        GameLogic.markCell(gameState, row, col, ch);
 
         return GameResponse.builder()
                 .status("Success")
                 .canPlace(true)
                 .horizontal(null)
                 .vertical(null)
-                .score(row + col)
+                .score(1)
                 .error("")
                 .build();
     }

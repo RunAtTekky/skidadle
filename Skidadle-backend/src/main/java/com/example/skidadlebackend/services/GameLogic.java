@@ -9,11 +9,20 @@ import java.util.List;
 public class GameLogic {
     DictionaryService dictionaryService;
 
+    public static boolean isUserTurn(GameState gs, int id) {
+        if (gs.getUser1().getId() == id) {
+            return gs.isFirstTurn();
+        } else {
+            return !gs.isFirstTurn();
+        }
+    }
+
     public static boolean validateCell(GameState gs, int row, int col, char ch) {
         return gs.getBoard().isInside(row, col) && gs.getBoard().isEmpty(row, col);
     }
 
     public static void markCell(GameState gs, int row, int col, char ch) {
+        gs.getBoard().set(row, col, ch);
     }
 
     public static String horizontalSearchSpace(GameState gs, int row, int col, char ch) {
