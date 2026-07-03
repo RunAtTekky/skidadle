@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GameLogic {
+    public static final int MAX_ROWS = 20;
+    public static final int MAX_COLS = 20;
+
     DictionaryService dictionaryService;
 
     @Autowired
@@ -92,5 +95,9 @@ public class GameLogic {
         }
 
         return cellRange;
+    }
+
+    public static boolean canCreateBoard(int row, int col) {
+        return row <= MAX_ROWS && col <= MAX_COLS;
     }
 }

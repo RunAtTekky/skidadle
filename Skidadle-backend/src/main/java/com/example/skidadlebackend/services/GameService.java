@@ -49,6 +49,14 @@ public class GameService {
     }
 
     public InitResponse initiateGame(GameState gameState, InitRequest initRequest) {
+        if (!GameLogic.canCreateBoard(initRequest.getRow(), initRequest.getCol())) {
+            String errorMsg = String.format("MAX_ROWS = %d, MAX_COLS = %d", GameLogic.MAX_ROWS, GameLogic.MAX_COLS);
+            return InitResponse.builder()
+                    .error(errorMsg)
+                    .status(ResponseStatus.ERROR)
+                    .build();
+        }
+
         return InitResponse.builder()
                 .board(gameState.getBoard())
                 .user1(gameState.getUser1())
