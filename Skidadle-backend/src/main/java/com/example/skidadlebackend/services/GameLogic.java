@@ -97,7 +97,7 @@ public class GameLogic {
         return cellRange;
     }
 
-    public static boolean canCreateBoard(int row, int col) {
+    public boolean canCreateBoard(int row, int col) {
         return row <= MAX_ROWS && col <= MAX_COLS;
     }
 }
