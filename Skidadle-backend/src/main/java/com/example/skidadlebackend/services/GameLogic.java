@@ -1,13 +1,19 @@
 package com.example.skidadlebackend.services;
 
 import com.example.skidadlebackend.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GameLogic {
     DictionaryService dictionaryService;
 
-    public static boolean isUserTurn(GameState gs, int id) {
+    @Autowired
+    public GameLogic(DictionaryService dictionaryService) {
+        this.dictionaryService = dictionaryService;
+    }
+
+    public boolean isUserTurn(GameState gs, int id) {
         if (gs.getUser1().getId() == id) {
             return gs.isFirstTurn();
         } else {
@@ -15,23 +21,23 @@ public class GameLogic {
         }
     }
 
-    public static boolean validateCell(GameState gs, int row, int col, char ch) {
+    public boolean validateCell(GameState gs, int row, int col, char ch) {
         return gs.getBoard().isInside(row, col) && gs.getBoard().isEmpty(row, col);
     }
 
-    public static void markCell(GameState gs, int row, int col, char ch) {
+    public void markCell(GameState gs, int row, int col, char ch) {
         gs.getBoard().set(row, col, ch);
     }
 
-    public static String horizontalSearchSpace(GameState gs, int row, int col, char ch) {
+    public String horizontalSearchSpace(GameState gs, int row, int col, char ch) {
         return searchSpace(gs, col, row, ch, true);
     }
 
-    public static String verticalSearchSpace(GameState gs, int row, int col, char ch) {
+    public String verticalSearchSpace(GameState gs, int row, int col, char ch) {
         return searchSpace(gs, row, col, ch, false);
     }
 
-    private static String searchSpace(GameState gs, int variable, int fixed, char ch, boolean isHorizontal) {
+    private String searchSpace(GameState gs, int variable, int fixed, char ch, boolean isHorizontal) {
         int starting = variable;
 
         if (isHorizontal) {
