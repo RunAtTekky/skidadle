@@ -6,10 +6,10 @@ import lombok.Value;
 @Value
 @Builder
 public class GameResponse {
-    String status;
     boolean canPlace;
     CellRange horizontal;
     CellRange vertical;
     int score;
     String error;
+    ResponseStatus status;
 }

@@ -10,4 +10,5 @@ public class InitResponse {
     User user1;
     User user2;
     String error;
+    ResponseStatus status;
 }

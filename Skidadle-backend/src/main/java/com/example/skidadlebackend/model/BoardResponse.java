@@ -8,4 +8,5 @@ import lombok.Value;
 public class BoardResponse {
     Board board;
     String error;
+    ResponseStatus status;
 }
