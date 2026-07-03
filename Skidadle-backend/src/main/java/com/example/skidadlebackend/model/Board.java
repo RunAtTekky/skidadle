@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
 public class Board {
+    private final static char EMPTY_CHAR = '^';
     private final static AtomicInteger idCounter = new AtomicInteger(1);
     private final int id;
     private final int rows;
@@ -17,6 +18,12 @@ public class Board {
         this.rows = rows;
         this.cols = cols;
         this.cells = new char[rows][cols];
+
+        for (int i=0; i<rows; i++) {
+            for (int j=0; j<cols; j++) {
+                cells[i][j] = EMPTY_CHAR;
+            }
+        }
     }
 
     public boolean isInside(int row, int col) {
@@ -27,7 +34,7 @@ public class Board {
     }
 
     public boolean isEmpty(int row, int col) {
-        return cells[row][col] == '\0';
+        return cells[row][col] == EMPTY_CHAR;
     }
 
     public char get(int row, int col) {
