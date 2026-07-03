@@ -6,8 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
 public class Board {
-    private static AtomicInteger idCounter = new AtomicInteger(1);
-    private int id;
+    private final static AtomicInteger idCounter = new AtomicInteger(1);
+    private final int id;
     private final int rows;
     private final int cols;
     private final char[][] cells;
