@@ -27,11 +27,7 @@ public class GameController {
     public InitResponse initiateGame(@RequestBody InitRequest initRequest) {
         gameState = new GameState(initRequest.getRow(), initRequest.getCol());
 
-        return InitResponse.builder()
-                .board(gameState.getBoard())
-                .user1(gameState.getUser1())
-                .user2(gameState.getUser2())
-                .build();
+        return gameService.initiateGame(gameState, initRequest);
     }
 
     @PostMapping("/place-tile")
@@ -40,8 +36,8 @@ public class GameController {
     }
 
     @PostMapping("/board")
-    public Board getBoard(@RequestParam int id) {
-        return gameState.getBoard();
+    public Board getBoard() {
+        return gameService.getBoard(gameState);
     }
 
 }

@@ -1,10 +1,10 @@
 package com.example.skidadlebackend.services;
 
-import com.example.skidadlebackend.model.GameResponse;
-import com.example.skidadlebackend.model.GameState;
-import com.example.skidadlebackend.model.PlaceTileRequest;
+import com.example.skidadlebackend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class GameService {
@@ -50,5 +50,17 @@ public class GameService {
                 .score(1)
                 .error("")
                 .build();
+    }
+
+    public InitResponse initiateGame(GameState gameState, InitRequest initRequest) {
+        return InitResponse.builder()
+                .board(gameState.getBoard())
+                .user1(gameState.getUser1())
+                .user2(gameState.getUser2())
+                .build();
+    }
+
+    public Board getBoard(GameState gameState) {
+        return gameState.getBoard();
     }
 }
