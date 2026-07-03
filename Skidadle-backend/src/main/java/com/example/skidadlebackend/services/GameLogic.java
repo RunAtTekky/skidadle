@@ -3,8 +3,6 @@ package com.example.skidadlebackend.services;
 import com.example.skidadlebackend.model.*;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class GameLogic {
     DictionaryService dictionaryService;

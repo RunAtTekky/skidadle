@@ -5,9 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class InitResponse {
+public class BoardResponse {
     Board board;
-    User user1;
-    User user2;
     String error;
 }

@@ -1,7 +1,6 @@
 package com.example.skidadlebackend.controller;
 
 import com.example.skidadlebackend.model.*;
-import com.example.skidadlebackend.services.GameLogic;
 import com.example.skidadlebackend.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/skidadle")
 public class GameController {
     private final GameService gameService;
-    private GameState gameState = new GameState(10, 10);
+    private GameState gameState;
 
     @Autowired
     public GameController(GameService gameService) {
@@ -36,7 +35,7 @@ public class GameController {
     }
 
     @PostMapping("/board")
-    public Board getBoard() {
+    public BoardResponse getBoard() {
         return gameService.getBoard(gameState);
     }
 

@@ -3,8 +3,6 @@ package com.example.skidadlebackend.services;
 import com.example.skidadlebackend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class GameService {
@@ -57,10 +55,22 @@ public class GameService {
                 .board(gameState.getBoard())
                 .user1(gameState.getUser1())
                 .user2(gameState.getUser2())
+                .error("")
                 .build();
     }
 
-    public Board getBoard(GameState gameState) {
-        return gameState.getBoard();
+    public BoardResponse getBoard(GameState gameState) {
+        if (gameState == null) {
+            return BoardResponse
+                    .builder()
+                    .error("Game has not been initialized")
+                    .build();
+        }
+
+        return BoardResponse
+                .builder()
+                .board(gameState.getBoard())
+                .error("")
+                .build();
     }
 }
