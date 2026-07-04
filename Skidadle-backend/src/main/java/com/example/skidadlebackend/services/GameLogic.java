@@ -17,19 +17,26 @@ public class GameLogic {
     }
 
     public boolean isUserTurn(GameState gs, int id) {
-        if (gs.getUser1().getId() == id) {
-            return gs.isFirstTurn();
-        } else {
-            return !gs.isFirstTurn();
-        }
+        return gs.isUserTurn(id);
     }
 
     public boolean validateCell(GameState gs, int row, int col, char ch) {
         return gs.getBoard().isInside(row, col) && gs.getBoard().isEmpty(row, col);
     }
 
-    public void markCell(GameState gs, int row, int col, char ch) {
+    public boolean markCell(GameState gs, int row, int col, char ch) {
         gs.getBoard().set(row, col, ch);
+        String horizontalSS = horizontalSearchSpace(gs, row, col, ch);
+        String verticalSS = verticalSearchSpace(gs, row, col, ch);
+
+        CellRange largestHorizontalWord = findLargestValidWord(horizontalSS, col);
+        CellRange largestVerticalWord = findLargestValidWord(verticalSS, row);
+
+        int scoreGained = largestHorizontalWord.getLength() + largestVerticalWord.getLength() - 1;
+        if (scoreGained == -1) return false;
+
+        gs.getCurrentUserTurn().addScore(scoreGained);
+        return true;
     }
 
     public String horizontalSearchSpace(GameState gs, int row, int col, char ch) {
@@ -87,7 +94,7 @@ public class GameLogic {
                 String word = searchSpace.substring(i, j);
                 if (!dictionaryService.isValidWord(word)) continue;
 
-                int currLength = cellRange.getEnd() - cellRange.getStart();
+                int currLength = cellRange.getLength();
                 if (word.length() >= currLength) {
                     cellRange = new CellRange(i, j);
                 }

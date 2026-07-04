@@ -36,7 +36,14 @@ public class GameService {
                     .build();
         }
 
-        gameLogic.markCell(gameState, row, col, ch);
+        boolean cellMarked = gameLogic.markCell(gameState, row, col, ch);
+        if (!cellMarked) {
+            return GameResponse.builder()
+                    .canPlace(false)
+                    .error("No such word exists")
+                    .status(ResponseStatus.ERROR)
+                    .build();
+        }
 
         return GameResponse.builder()
                 .canPlace(true)
