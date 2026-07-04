@@ -1,6 +1,6 @@
 import { initializeGameAction } from "./LandingPage.actions";
 
-export const handlePlayGame = async (row, col) => {
+const handlePlayGame = async (row, col) => {
   try {
     const data = await initializeGameAction(row, col);
 
@@ -20,4 +20,8 @@ export const handlePlayGame = async (row, col) => {
     alert("Unable to connect to backend");
     return null;
   }
+};
+
+export const ACTION_HANDLERS = {
+  PLAY_GAME: handlePlayGame,
 };
