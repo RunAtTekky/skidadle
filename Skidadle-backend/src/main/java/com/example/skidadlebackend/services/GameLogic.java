@@ -26,6 +26,7 @@ public class GameLogic {
 
     public boolean markCell(GameState gs, int row, int col, char ch) {
         gs.getBoard().set(row, col, ch);
+
         String horizontalSS = horizontalSearchSpace(gs, row, col, ch);
         String verticalSS = verticalSearchSpace(gs, row, col, ch);
 
@@ -51,22 +52,22 @@ public class GameLogic {
         int starting = variable;
 
         if (isHorizontal) {
-            while (gs.getBoard().isInside(fixed, variable) && !gs.getBoard().isEmpty(fixed, variable)) {
+            while (gs.getBoard().isInside(fixed, starting) && !gs.getBoard().isEmpty(fixed, starting)) {
                 starting--;
             }
         } else {
-            while (gs.getBoard().isInside(variable, fixed) && !gs.getBoard().isEmpty(variable, fixed)) {
+            while (gs.getBoard().isInside(starting, fixed) && !gs.getBoard().isEmpty(starting, fixed)) {
                 starting--;
             }
         }
 
         int finishing = variable;
         if (isHorizontal) {
-            while (gs.getBoard().isInside(fixed, variable) && !gs.getBoard().isEmpty(fixed, variable)) {
+            while (gs.getBoard().isInside(fixed, finishing) && !gs.getBoard().isEmpty(fixed, finishing)) {
                 finishing++;
             }
         } else {
-            while (gs.getBoard().isInside(variable, fixed) && !gs.getBoard().isEmpty(variable, fixed)) {
+            while (gs.getBoard().isInside(finishing, fixed) && !gs.getBoard().isEmpty(finishing, fixed)) {
                 finishing++;
             }
         }

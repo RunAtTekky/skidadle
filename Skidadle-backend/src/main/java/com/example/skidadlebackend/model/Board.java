@@ -46,8 +46,20 @@ public class Board {
     }
 
     public String getWordFromRange(Position start, Position end) {
-        // TODO: get word from range
+        StringBuilder word = new StringBuilder();
 
-        return "";
+        if (start.getRow() == end.getRow()) {
+            for (int col=start.getCol(); col<=end.getCol(); col++) {
+                char ch = get(start.getRow(), col);
+                word.append(ch);
+            }
+        } else {
+            for (int row=start.getRow(); row<=end.getRow(); row++) {
+                char ch = get(row, start.getCol());
+                word.append(ch);
+            }
+        }
+
+        return word.toString();
     }
 }
