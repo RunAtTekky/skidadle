@@ -1,42 +1,21 @@
 import { useState } from "react";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
+import { handlePlayGame } from "./LandingPage.actionHandlers";
 import "./landingpage.css";
 
 function LandingPage() {
   const [row, setRow] = useState(10);
   const [col, setCol] = useState(10);
 
-  const handlePlayOffline = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/skidadle/init", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          row: Number(row),
-          col: Number(col),
-        }),
-      });
+  const playGame = async () => {
+    const data = await handlePlayGame(row, col);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.error || "Failed to initialize game");
-        return;
-      }
-
-      if (data.status !== "SUCCESS") {
-        alert(data.error || "Game initialization failed");
-        return;
-      }
-
-      console.log("Game initialized:", data);
-    } catch (error) {
-      console.error(error);
-      alert("Unable to connect to backend");
+    if (!data) {
+      return;
     }
+
+    console.log("Game initialized:", data);
   };
 
   return (
@@ -66,8 +45,8 @@ function LandingPage() {
       </div>
 
       <div className="button">
-        <Button onClick={handlePlayOffline}>Play Offline</Button>
-        <Button>Play Online</Button>
+        <Button onClick={playGame}>Play Offline</Button>
+        <Button onClick={playGame}>Play Online</Button>
       </div>
     </div>
   );
