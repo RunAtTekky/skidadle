@@ -30,10 +30,10 @@ public class GameLogic {
         String horizontalSS = horizontalSearchSpace(gs, row, col, ch);
         String verticalSS = verticalSearchSpace(gs, row, col, ch);
 
-        CellRange largestHorizontalWord = findLargestValidWord(horizontalSS, col);
-        CellRange largestVerticalWord = findLargestValidWord(verticalSS, row);
+        String largestHorizontalWord = findLargestValidWord(horizontalSS);
+        String largestVerticalWord = findLargestValidWord(verticalSS);
 
-        int scoreGained = largestHorizontalWord.getLength() + largestVerticalWord.getLength() - 1;
+        int scoreGained = largestHorizontalWord.length() + largestVerticalWord.length() - 1;
         if (scoreGained == -1) return false;
 
         gs.getCurrentUserTurn().addScore(scoreGained);
@@ -52,22 +52,22 @@ public class GameLogic {
         int starting = variable;
 
         if (isHorizontal) {
-            while (gs.getBoard().isInside(fixed, starting) && !gs.getBoard().isEmpty(fixed, starting)) {
+            while (gs.getBoard().isInside(fixed, starting-1) && !gs.getBoard().isEmpty(fixed, starting-1)) {
                 starting--;
             }
         } else {
-            while (gs.getBoard().isInside(starting, fixed) && !gs.getBoard().isEmpty(starting, fixed)) {
+            while (gs.getBoard().isInside(starting-1, fixed) && !gs.getBoard().isEmpty(starting-1, fixed)) {
                 starting--;
             }
         }
 
         int finishing = variable;
         if (isHorizontal) {
-            while (gs.getBoard().isInside(fixed, finishing) && !gs.getBoard().isEmpty(fixed, finishing)) {
+            while (gs.getBoard().isInside(fixed, finishing+1) && !gs.getBoard().isEmpty(fixed, finishing+1)) {
                 finishing++;
             }
         } else {
-            while (gs.getBoard().isInside(finishing, fixed) && !gs.getBoard().isEmpty(finishing, fixed)) {
+            while (gs.getBoard().isInside(finishing+1, fixed) && !gs.getBoard().isEmpty(finishing+1, fixed)) {
                 finishing++;
             }
         }
@@ -86,23 +86,23 @@ public class GameLogic {
         return gs.getBoard().getWordFromRange(start, end);
     }
 
-    public CellRange findLargestValidWord(String searchSpace, int pivot) {
-        CellRange cellRange = new CellRange(0, 0);
+    public String findLargestValidWord(String searchSpace) {
+        String largestWord = "";
 
         int n = searchSpace.length();
-        for (int i=0; i<=pivot; i++) {
-            for (int j=pivot; j<n; j++) {
-                String word = searchSpace.substring(i, j);
+        for (int i=0; i<n; i++) {
+            for (int j=i; j<n; j++) {
+                String word = searchSpace.substring(i, j+1);
                 if (!dictionaryService.isValidWord(word)) continue;
 
-                int currLength = cellRange.getLength();
+                int currLength = largestWord.length();
                 if (word.length() >= currLength) {
-                    cellRange = new CellRange(i, j);
+                    largestWord = word;
                 }
             }
         }
 
-        return cellRange;
+        return largestWord;
     }
 
     public boolean canCreateBoard(int row, int col) {

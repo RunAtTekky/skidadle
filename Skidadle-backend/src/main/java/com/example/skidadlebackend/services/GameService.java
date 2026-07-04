@@ -45,6 +45,8 @@ public class GameService {
                     .build();
         }
 
+        gameState.changeTurn();
+
         return GameResponse.builder()
                 .canPlace(true)
                 .horizontal(null)
