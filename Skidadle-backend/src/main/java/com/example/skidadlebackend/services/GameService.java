@@ -87,4 +87,14 @@ public class GameService {
                 .status(ResponseStatus.SUCCESS)
                 .build();
     }
+
+    public UserResponse getUserScore(GameState gameState, int id) {
+        User user = gameState.getUser(id);
+
+        return UserResponse.builder()
+                .id(user.getId())
+                .boardId(user.getBoardId())
+                .score(user.getTotalScore())
+                .build();
+    }
 }

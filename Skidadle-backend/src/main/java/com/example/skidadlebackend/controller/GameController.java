@@ -39,4 +39,9 @@ public class GameController {
         return gameService.getBoard(gameState);
     }
 
+    @GetMapping("/get-score")
+    public UserResponse getScore(@RequestParam int id) {
+        return gameService.getUserScore(gameState, id);
+    }
+
 }

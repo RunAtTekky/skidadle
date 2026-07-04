@@ -27,4 +27,9 @@ public class GameState {
     public boolean isUserTurn(int id) {
         return currentUserTurn.getId() == id;
     }
+
+    public User getUser(int id) {
+        if (user1.getId() == id) return user1;
+        return user2;
+    }
 }
