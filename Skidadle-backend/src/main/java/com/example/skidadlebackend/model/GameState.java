@@ -1,22 +1,30 @@
 package com.example.skidadlebackend.model;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class GameState {
     private final Board board;
     private final User user1;
     private final User user2;
-    private boolean isFirstTurn;
+    private User currentUserTurn;
 
     public GameState(int rows, int cols) {
         board = new Board(rows, cols);
         user1 = User.create(board.getId());
         user2 = User.create(board.getId());
-        isFirstTurn = true;
+        currentUserTurn = user1;
     }
 
     public void changeTurn() {
-        isFirstTurn = !isFirstTurn;
+        currentUserTurn =  (currentUserTurn == user1) ? user2 : user1;
+    }
+
+    public boolean isUserTurn(User candidate) {
+        return candidate == currentUserTurn;
+    }
+
+    public boolean isUserTurn(int id) {
+        return currentUserTurn.getId() == id;
     }
 }

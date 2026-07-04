@@ -20,4 +20,8 @@ public class User {
                 .totalScore(0)
                 .build();
     }
+
+    public void addScore(int toAdd) {
+        totalScore += toAdd;
+    }
 }

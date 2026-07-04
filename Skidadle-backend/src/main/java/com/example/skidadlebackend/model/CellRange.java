@@ -8,4 +8,8 @@ import lombok.Getter;
 public class CellRange {
     private int start;
     private int end;
+
+    public int getLength() {
+        return end - start;
+    }
 }
