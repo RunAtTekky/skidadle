@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
-import { ACTION_HANDLERS } from "./LandingPage.actionHandlers";
+import { ACTION_HANDLERS, PLAY_GAME } from "./LandingPage.actionHandlers";
 import "./landingpage.css";
 
 function LandingPage() {
@@ -9,9 +9,10 @@ function LandingPage() {
   const [col, setCol] = useState(10);
 
   const playGame = async () => {
-    const data = await ACTION_HANDLERS.PLAY_GAME(row, col);
+   const data = await ACTION_HANDLERS[PLAY_GAME](row, col);
 
     if (!data) {
+      alert("Unable to start the game. Please try again.");
       return;
     }
 

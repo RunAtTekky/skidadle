@@ -23,5 +23,5 @@ const handlePlayGame = async (row, col) => {
 };
 
 export const ACTION_HANDLERS = {
-  PLAY_GAME: handlePlayGame,
+  [PLAY_GAME]: handlePlayGame,
 };
