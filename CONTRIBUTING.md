@@ -25,3 +25,18 @@ For frontend check this for [reference](https://github.com/RunAtTekky/cpu_tictac
 ### Backend
 We are using Spring Boot
 Lombok must be used throughout the project
+
+
+## Using the Deployed Backend
+
+To use the deployed backend:
+
+- Navigate to the skidadle-ui directory.
+- Create a .env file if it does not already exist.
+- Add the following to the .env file:
+  VITE_API_BASE_URL=https://skidadle-backend.onrender.com/api/skidadle
+- Save the .env file.
+- Install the frontend dependencies by running npm install.
+- Start the frontend development server by running npm run dev.
+
+The frontend will now send API requests to the deployed backend.
