@@ -1,6 +1,6 @@
 import "./TextInput.css";
 
-function TextInput({ label, defaultValue, min, max }) {
+function TextInput({ label, value, onChange, min, max }) {
   return (
     <div className="input-group">
       <label className="label">{label}</label>
@@ -8,7 +8,8 @@ function TextInput({ label, defaultValue, min, max }) {
       <input
         type="number"
         className="input"
-        defaultValue={defaultValue}
+        value={value}
+        onChange={onChange}
         min={min}
         max={max}
       />
