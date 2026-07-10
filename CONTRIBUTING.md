@@ -48,3 +48,5 @@ The frontend will now send API requests to the deployed backend.
 ### Backend
 We are using Spring Boot
 Lombok must be used throughout the project
+
+
