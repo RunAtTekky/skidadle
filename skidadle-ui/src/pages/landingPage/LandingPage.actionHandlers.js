@@ -1,5 +1,7 @@
 import { initializeGameAction } from "./LandingPage.actions";
 
+export const PLAY_GAME = "PLAY_GAME";
+
 const handlePlayGame = async (row, col) => {
   try {
     const data = await initializeGameAction(row, col);

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
 import { ACTION_HANDLERS, PLAY_GAME } from "./LandingPage.actionHandlers";
@@ -8,16 +9,28 @@ function LandingPage() {
   const [row, setRow] = useState(10);
   const [col, setCol] = useState(10);
 
-  const playGame = async () => {
-   const data = await ACTION_HANDLERS[PLAY_GAME](row, col);
+  const navigate = useNavigate();
 
-    if (!data) {
-      alert("Unable to start the game. Please try again.");
-      return;
-    }
+const playGame = async () => {
+  console.log("Play button clicked");
 
-    console.log("Game initialized:", data);
-  };
+  const data = await ACTION_HANDLERS[PLAY_GAME](row, col);
+
+  console.log("Response:", data);
+
+  if (!data) {
+    alert("Unable to start the game. Please try again.");
+    return;
+  }
+
+  console.log("Game initialized:", data);
+  navigate("/board", {
+  state: {
+    row: Number(row),
+    col: Number(col),
+  },
+});
+};
 
   return (
     <div className="container">
