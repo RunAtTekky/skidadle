@@ -22,6 +22,30 @@ AI slop is not welcome, code is sacred.
 We are using React
 For frontend check this for [reference](https://github.com/RunAtTekky/cpu_tictactoe/tree/ui/src/pages/GamePage)
 
+### Using the Deployed Backend
+
+The backend URL is:
+
+`https://skidadle-backend.onrender.com/api/skidadle`
+
+Create a `.env` file inside `skidadle-ui` and add:
+
+`VITE_API_BASE_URL=https://skidadle-backend.onrender.com/api/skidadle`
+
+```bash
+# Navigate to the frontend directory
+cd skidadle-ui
+
+# Install frontend dependencies
+npm install
+
+# Start the frontend development server
+npm run dev
+```
+
+The frontend will now send API requests to the deployed backend.
+
 ### Backend
 We are using Spring Boot
 Lombok must be used throughout the project
+                                        
