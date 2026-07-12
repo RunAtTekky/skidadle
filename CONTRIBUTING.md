@@ -22,7 +22,7 @@ AI slop is not welcome, code is sacred.
 We are using React
 For frontend check this for [reference](https://github.com/RunAtTekky/cpu_tictactoe/tree/ui/src/pages/GamePage)
 
-## Using the Deployed Backend
+### Using the Deployed Backend
 
 The backend URL is:
 
