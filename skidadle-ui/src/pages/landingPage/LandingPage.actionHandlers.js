@@ -1,6 +1,5 @@
 import { initializeGameAction } from "./LandingPage.actions";
-
-export const PLAY_GAME = "PLAY_GAME";
+import { CUSTOM_ACTIONS } from "./LandingPage.constants";
 
 const handlePlayGame = async (row, col) => {
   try {
@@ -25,5 +24,5 @@ const handlePlayGame = async (row, col) => {
 };
 
 export const ACTION_HANDLERS = {
-  [PLAY_GAME]: handlePlayGame,
+  [CUSTOM_ACTIONS.PLAY_GAME]: handlePlayGame,
 };
