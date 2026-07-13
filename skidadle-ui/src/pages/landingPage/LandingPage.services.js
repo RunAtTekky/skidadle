@@ -1,8 +1,8 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { API } from "../../constants";
 
 export const landingPageApi = {
   initializeGame: async (row, col) => {
-    const response = await fetch(`${BASE_URL}/init`, {
+    const response = await fetch(API.INIT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
