@@ -17,12 +17,11 @@ const handlePlayGame = async (row, col) => {
 
     return data;
   } catch (error) {
-    console.error(error);
     alert("Unable to connect to backend");
     return null;
   }
 };
 
 export const ACTION_HANDLERS = {
-  [CUSTOM_ACTIONS.PLAY_GAME]: handlePlayGame,
+  [CUSTOM_ACTIONS.INITIALISE_GAME]: handlePlayGame,
 };

@@ -13,18 +13,16 @@ function LandingPage() {
   const navigate = useNavigate();
 
   const playGame = async () => {
-    console.log("Play button clicked");
-
-    const data = await ACTION_HANDLERS[CUSTOM_ACTIONS.PLAY_GAME](row, col);
-
-    console.log("Response:", data);
+    const data = await ACTION_HANDLERS[CUSTOM_ACTIONS.INITIALISE_GAME](
+      row,
+      col,
+    );
 
     if (!data) {
       alert("Unable to start the game. Please try again.");
       return;
     }
 
-    console.log("Game initialized:", data);
     navigate("/board", {
       state: {
         row: Number(row),
