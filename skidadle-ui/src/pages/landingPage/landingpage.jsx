@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
-import { ACTION_HANDLERS, PLAY_GAME } from "./LandingPage.actionHandlers";
+import { ACTION_HANDLERS } from "./LandingPage.actionHandlers";
+import { CUSTOM_ACTIONS } from "./LandingPage.constants";
 import "./landingpage.css";
 
 function LandingPage() {
@@ -11,26 +12,24 @@ function LandingPage() {
 
   const navigate = useNavigate();
 
-const playGame = async () => {
-  console.log("Play button clicked");
+  const playGame = async () => {
+    const data = await ACTION_HANDLERS[CUSTOM_ACTIONS.INITIALISE_GAME](
+      row,
+      col,
+    );
 
-  const data = await ACTION_HANDLERS[PLAY_GAME](row, col);
+    if (!data) {
+      alert("Unable to start the game. Please try again.");
+      return;
+    }
 
-  console.log("Response:", data);
-
-  if (!data) {
-    alert("Unable to start the game. Please try again.");
-    return;
-  }
-
-  console.log("Game initialized:", data);
-  navigate("/board", {
-  state: {
-    row: Number(row),
-    col: Number(col),
-  },
-});
-};
+    navigate("/board", {
+      state: {
+        row: Number(row),
+        col: Number(col),
+      },
+    });
+  };
 
   return (
     <div className="container">
