@@ -2,7 +2,7 @@ import { API } from "../../constants";
 
 export const landingPageApi = {
   initializeGame: async (row, col) => {
-    const response = await fetch(`${API.BASE_URL}${API.INIT}`, {
+    const response = await fetch(API.BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
