@@ -97,6 +97,7 @@ public class GameService {
                 .id(user.getId())
                 .boardId(user.getBoardId())
                 .score(user.getTotalScore())
+                .status(ResponseStatus.SUCCESS)
                 .build();
     }
 }

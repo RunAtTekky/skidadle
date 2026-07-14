@@ -9,4 +9,5 @@ public class UserResponse {
     int id;
     int boardId;
     int score;
+    ResponseStatus status;
 }
