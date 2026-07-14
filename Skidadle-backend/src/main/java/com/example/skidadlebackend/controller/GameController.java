@@ -1,0 +1,50 @@
+package com.example.skidadlebackend.controller;
+
+import com.example.skidadlebackend.model.*;
+import com.example.skidadlebackend.model.ResponseStatus;
+import com.example.skidadlebackend.services.GameService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/skidadle")
+public class GameController {
+    private final GameService gameService;
+    private GameState gameState;
+
+    @Autowired
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
+    }
+
+    @GetMapping("/welcome")
+    public HelloResponse hello() {
+        return HelloResponse.builder()
+                .greeting("Welcome to Skidadle")
+                .status(ResponseStatus.SUCCESS)
+                .build();
+    }
+
+    @PostMapping("/init")
+    public InitResponse initiateGame(@RequestBody InitRequest initRequest) {
+        gameState = new GameState(initRequest.getRow(), initRequest.getCol());
+
+        return gameService.initiateGame(gameState, initRequest);
+    }
+
+    @PostMapping("/place-tile")
+    public GameResponse placeTile(@RequestBody PlaceTileRequest placeTileRequest) {
+        return gameService.placeTile(gameState, placeTileRequest);
+    }
+
+    @PostMapping("/board")
+    public BoardResponse getBoard() {
+        return gameService.getBoard(gameState);
+    }
+
+    @GetMapping("/get-score")
+    public UserResponse getScore(@RequestParam int id) {
+        return gameService.getUserScore(gameState, id);
+    }
+
+}
