@@ -1,6 +1,7 @@
 package com.example.skidadlebackend.controller;
 
 import com.example.skidadlebackend.model.*;
+import com.example.skidadlebackend.model.ResponseStatus;
 import com.example.skidadlebackend.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,11 @@ public class GameController {
     }
 
     @GetMapping("/welcome")
-    public String hello() {
-        final String GAME_NAME = "Skidadle";
-        return "Welcome to " + GAME_NAME;
+    public HelloResponse hello() {
+        return HelloResponse.builder()
+                .greeting("Welcome to Skidadle")
+                .status(ResponseStatus.SUCCESS)
+                .build();
     }
 
     @PostMapping("/init")
