@@ -50,38 +50,17 @@ public class GameLogic {
 
     private String searchSpace(GameState gs, int variable, int fixed, char ch, boolean isHorizontal) {
         int starting = variable;
-
-        if (isHorizontal) {
-            while (gs.getBoard().isInside(fixed, starting-1) && !gs.getBoard().isEmpty(fixed, starting-1)) {
-                starting--;
-            }
-        } else {
-            while (gs.getBoard().isInside(starting-1, fixed) && !gs.getBoard().isEmpty(starting-1, fixed)) {
-                starting--;
-            }
+        while (isCellOccupied(gs.getBoard(), fixed, starting-1, isHorizontal)) {
+            starting--;
         }
 
         int finishing = variable;
-        if (isHorizontal) {
-            while (gs.getBoard().isInside(fixed, finishing+1) && !gs.getBoard().isEmpty(fixed, finishing+1)) {
-                finishing++;
-            }
-        } else {
-            while (gs.getBoard().isInside(finishing+1, fixed) && !gs.getBoard().isEmpty(finishing+1, fixed)) {
-                finishing++;
-            }
+        while (isCellOccupied(gs.getBoard(), fixed, finishing+1, isHorizontal)) {
+            finishing++;
         }
 
-        Position start;
-        Position end;
-
-        if (isHorizontal) {
-            start = new Position(fixed, starting);
-            end = new Position(fixed, finishing);
-        } else {
-            start = new Position(starting, fixed);
-            end = new Position(finishing, fixed);
-        }
+        Position start = isHorizontal ? new Position(fixed, starting) : new Position(starting, fixed);
+        Position end = isHorizontal ? new Position(fixed, finishing) : new Position(finishing, fixed);
 
         return gs.getBoard().getWordFromRange(start, end);
     }
@@ -107,5 +86,15 @@ public class GameLogic {
 
     public boolean canCreateBoard(int row, int col) {
         return row <= MAX_ROWS && col <= MAX_COLS;
+    }
+
+    // Horizontal - Row stays fixed
+    // Vertical - Column stays fixed
+    private boolean isCellOccupied(Board board, int fixed, int variable, boolean isHorizontal) {
+        if (isHorizontal) {
+            return board.isInside(fixed, variable) && !board.isEmpty(fixed, variable);
+        } else {
+            return board.isInside(variable, fixed) && !board.isEmpty(variable, fixed);
+        }
     }
 }
