@@ -36,22 +36,14 @@ public class GameService {
                     .build();
         }
 
-        boolean cellMarked = gameLogic.markCell(gameState, row, col, ch);
-        if (!cellMarked) {
-            return GameResponse.builder()
-                    .canPlace(false)
-                    .error("No such word exists")
-                    .status(ResponseStatus.ERROR)
-                    .build();
-        }
+        Position[] cellsMarked = gameLogic.markCell(gameState, row, col, ch);
 
         gameState.changeTurn();
 
         return GameResponse.builder()
                 .canPlace(true)
-                .horizontal(null)
-                .vertical(null)
-                .score(1)
+                .highlightedCells(cellsMarked)
+                .score(cellsMarked.length)
                 .error("")
                 .status(ResponseStatus.SUCCESS)
                 .build();
