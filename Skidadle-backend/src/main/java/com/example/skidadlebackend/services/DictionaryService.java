@@ -20,9 +20,9 @@ public class DictionaryService {
         possibleWords = new HashSet<>();
 
         try {
-            ClassPathResource resourc = new ClassPathResource("wordlist.txt");
+            ClassPathResource resource = new ClassPathResource("wordlist.txt");
             BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(resourc.getInputStream(), StandardCharsets.UTF_8)
+                    new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)
             );
 
             String line;
