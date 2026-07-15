@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./MainBoard.css";
+import { placeTileAction } from "./MainBoard.actions";
 
 function MainBoard() {
   const { state } = useLocation();
 
-  const row = Number(state?.row) || 10;
-  const col = Number(state?.col) || 10;
+  const boardData = state?.board;
+  const user1 = state?.user1;
+  const user2 = state?.user2;
+
+  const row = boardData?.rows || 10;
+  const col = boardData?.cols || 10;
 
   const boardAreaWidth = window.innerWidth * 0.8;
   const boardAreaHeight = window.innerHeight;
@@ -17,19 +22,48 @@ function MainBoard() {
   );
 
   const [board, setBoard] = useState(
-    Array.from({ length: row * col }, () => "")
+    boardData?.cells
+      .flatMap((row) => row.split(""))
+      .map((cell) => (cell === "^" ? "" : cell)) ??
+      Array.from({ length: row * col }, () => "")
   );
 
-  const handleInputChange = (index, value) => {
+  const [currentUser, setCurrentUser] = useState(user1);
+
+  const handleInputChange = async (index, value) => {
     const input = value.toUpperCase();
 
     if (input !== "" && !/^[A-Z]$/.test(input)) {
       return;
     }
 
+    if (board[index] !== "") {
+      return;
+    }
+
+    const currentRow = Math.floor(index / col);
+    const currentCol = index % col;
+
+    const response = await placeTileAction({
+      id: currentUser.id,
+      boardId: currentUser.boardId,
+      row: currentRow,
+      col: currentCol,
+      ch: input,
+    });
+
+    if (!response.ok || !response.canPlace) {
+      alert(response.error);
+      return;
+    }
+
     const updatedBoard = [...board];
     updatedBoard[index] = input;
     setBoard(updatedBoard);
+
+    setCurrentUser(
+      currentUser.id === user1.id ? user2 : user1
+    );
   };
 
   return (

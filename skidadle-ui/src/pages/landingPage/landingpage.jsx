@@ -22,13 +22,15 @@ function LandingPage() {
       alert("Unable to start the game. Please try again.");
       return;
     }
+    console.log(data);
 
-    navigate("/board", {
-      state: {
-        row: Number(row),
-        col: Number(col),
-      },
-    });
+   navigate("/board", {
+  state: {
+    board: data.board,
+    user1: data.user1,
+    user2: data.user2,
+  },
+});
   };
 
   return (
