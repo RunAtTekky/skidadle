@@ -8,8 +8,9 @@ import lombok.Getter;
 public class CellRange {
     private int start;
     private int end;
+    private String text;
 
     public int getLength() {
-        return end - start;
+        return text.length();
     }
 }

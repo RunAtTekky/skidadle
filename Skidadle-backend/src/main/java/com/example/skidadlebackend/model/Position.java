@@ -8,6 +8,6 @@ import lombok.Value;
 @Value
 @AllArgsConstructor
 public class Position {
-    private int row;
-    private int col;
+    int row;
+    int col;
 }

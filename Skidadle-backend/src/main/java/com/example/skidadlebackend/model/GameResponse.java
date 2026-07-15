@@ -7,8 +7,7 @@ import lombok.Value;
 @Builder
 public class GameResponse {
     boolean canPlace;
-    CellRange horizontal;
-    CellRange vertical;
+    Position[] highlightedCells;
     int score;
     String error;
     ResponseStatus status;
