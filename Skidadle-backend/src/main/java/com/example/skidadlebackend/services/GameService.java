@@ -36,7 +36,7 @@ public class GameService {
                     .build();
         }
 
-        Position[] cellsMarked = gameLogic.markCell(gameState, row, col, ch);
+        Position[] cellsMarked = gameLogic.markCellAndGetHighlightedCells(gameState, row, col, ch);
 
         gameState.changeTurn();
 

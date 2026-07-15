@@ -4,7 +4,6 @@ import com.example.skidadlebackend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +27,7 @@ public class GameLogic {
         return gs.getBoard().isInside(row, col) && gs.getBoard().isEmpty(row, col);
     }
 
-    public Position[] markCell(GameState gs, int row, int col, char ch) {
+    public Position[] markCellAndGetHighlightedCells(GameState gs, int row, int col, char ch) {
         gs.getBoard().set(row, col, ch);
 
         CellRange horizontalSS = horizontalSearchSpace(gs, row, col, ch);
@@ -37,14 +36,12 @@ public class GameLogic {
         CellRange largestHorizontalWord = findLargestValidWord(horizontalSS);
         CellRange largestVerticalWord = findLargestValidWord(verticalSS);
 
-        ArrayList<Position> cellsMarked = getMarkedCells(largestHorizontalWord, largestVerticalWord, row, col);
-
         int scoreGained = largestHorizontalWord.getLength() + largestVerticalWord.getLength() - 1;
         if (scoreGained == -1) scoreGained = 0;
 
         gs.getCurrentUserTurn().addScore(scoreGained);
 
-        return cellsMarked.toArray(new Position[0]);
+        return getMarkedCells(largestHorizontalWord, largestVerticalWord, row, col);
     }
 
     public CellRange horizontalSearchSpace(GameState gs, int row, int col, char ch) {
@@ -109,7 +106,7 @@ public class GameLogic {
         }
     }
 
-    private ArrayList<Position> getMarkedCells(CellRange largestHorizontalWord, CellRange largestVerticalWord, int row, int col) {
+    private Position[] getMarkedCells(CellRange largestHorizontalWord, CellRange largestVerticalWord, int row, int col) {
         Set<Position> markedCells = new HashSet<>();
 
         for (int j=largestHorizontalWord.getStart(); j<=largestHorizontalWord.getEnd(); j++) {
@@ -120,6 +117,6 @@ public class GameLogic {
             markedCells.add(new Position(i, col));
         }
 
-        return new ArrayList<>(markedCells);
+        return markedCells.toArray(new Position[0]);
     }
 }
