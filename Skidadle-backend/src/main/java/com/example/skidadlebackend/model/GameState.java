@@ -17,7 +17,7 @@ public class GameState {
     }
 
     public void changeTurn() {
-        currentUserTurn =  (currentUserTurn == user1) ? user2 : user1;
+        currentUserTurn = (currentUserTurn == user1) ? user2 : user1;
     }
 
     public boolean isUserTurn(User candidate) {

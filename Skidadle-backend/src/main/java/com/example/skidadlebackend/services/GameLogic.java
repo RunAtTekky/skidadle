@@ -4,6 +4,9 @@ import com.example.skidadlebackend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 public class GameLogic {
     public static final int MAX_ROWS = 20;
@@ -24,31 +27,32 @@ public class GameLogic {
         return gs.getBoard().isInside(row, col) && gs.getBoard().isEmpty(row, col);
     }
 
-    public boolean markCell(GameState gs, int row, int col, char ch) {
+    public Position[] markCellAndGetHighlightedCells(GameState gs, int row, int col, char ch) {
         gs.getBoard().set(row, col, ch);
 
-        String horizontalSS = horizontalSearchSpace(gs, row, col, ch);
-        String verticalSS = verticalSearchSpace(gs, row, col, ch);
+        CellRange horizontalSS = horizontalSearchSpace(gs, row, col, ch);
+        CellRange verticalSS = verticalSearchSpace(gs, row, col, ch);
 
-        String largestHorizontalWord = findLargestValidWord(horizontalSS);
-        String largestVerticalWord = findLargestValidWord(verticalSS);
+        CellRange largestHorizontalWord = findLargestValidWord(horizontalSS);
+        CellRange largestVerticalWord = findLargestValidWord(verticalSS);
 
-        int scoreGained = largestHorizontalWord.length() + largestVerticalWord.length() - 1;
-        if (scoreGained == -1) return false;
+        int scoreGained = largestHorizontalWord.getLength() + largestVerticalWord.getLength() - 1;
+        if (scoreGained == -1) scoreGained = 0;
 
         gs.getCurrentUserTurn().addScore(scoreGained);
-        return true;
+
+        return getMarkedCells(largestHorizontalWord, largestVerticalWord, row, col);
     }
 
-    public String horizontalSearchSpace(GameState gs, int row, int col, char ch) {
+    public CellRange horizontalSearchSpace(GameState gs, int row, int col, char ch) {
         return searchSpace(gs, col, row, ch, true);
     }
 
-    public String verticalSearchSpace(GameState gs, int row, int col, char ch) {
+    public CellRange verticalSearchSpace(GameState gs, int row, int col, char ch) {
         return searchSpace(gs, row, col, ch, false);
     }
 
-    private String searchSpace(GameState gs, int variable, int fixed, char ch, boolean isHorizontal) {
+    private CellRange searchSpace(GameState gs, int variable, int fixed, char ch, boolean isHorizontal) {
         int starting = variable;
         while (isCellOccupied(gs.getBoard(), fixed, starting-1, isHorizontal)) {
             starting--;
@@ -62,26 +66,30 @@ public class GameLogic {
         Position start = isHorizontal ? new Position(fixed, starting) : new Position(starting, fixed);
         Position end = isHorizontal ? new Position(fixed, finishing) : new Position(finishing, fixed);
 
-        return gs.getBoard().getWordFromRange(start, end);
+        String text = gs.getBoard().getWordFromRange(start, end);
+
+        return new CellRange(starting, finishing, text);
     }
 
-    public String findLargestValidWord(String searchSpace) {
-        String largestWord = "";
+    public CellRange findLargestValidWord(CellRange searchSpace) {
+        String text = searchSpace.getText();
 
-        int n = searchSpace.length();
+        CellRange result = new CellRange(0, 0, "");
+
+        int n = text.length();
         for (int i=0; i<n; i++) {
             for (int j=i; j<n; j++) {
-                String word = searchSpace.substring(i, j+1);
+                String word = text.substring(i, j+1);
                 if (!dictionaryService.isValidWord(word)) continue;
 
-                int currLength = largestWord.length();
+                int currLength = result.getLength();
                 if (word.length() >= currLength) {
-                    largestWord = word;
+                    result = new CellRange(i + searchSpace.getStart(), j + searchSpace.getStart(), word);
                 }
             }
         }
 
-        return largestWord;
+        return result;
     }
 
     public boolean canCreateBoard(int row, int col) {
@@ -96,5 +104,19 @@ public class GameLogic {
         } else {
             return board.isInside(variable, fixed) && !board.isEmpty(variable, fixed);
         }
+    }
+
+    private Position[] getMarkedCells(CellRange largestHorizontalWord, CellRange largestVerticalWord, int row, int col) {
+        Set<Position> markedCells = new HashSet<>();
+
+        for (int j=largestHorizontalWord.getStart(); j<=largestHorizontalWord.getEnd(); j++) {
+            markedCells.add(new Position(row, j));
+        }
+
+        for (int i=largestVerticalWord.getStart(); i<=largestVerticalWord.getEnd(); i++) {
+            markedCells.add(new Position(i, col));
+        }
+
+        return markedCells.toArray(new Position[0]);
     }
 }
