@@ -3,6 +3,12 @@ import _get from "lodash/get";
 import "./MainBoard.css";
 import { placeTileAction } from "./MainBoard.actions";
 
+function getBoardState(board) {
+  return _get(board, "cells", [])
+    .flatMap((row) => row.split(""))
+    .map((cell) => (cell === "^" ? "" : cell));
+}
+
 function MainBoard({ board, user1, user2 }) {
   const row = _get(board, "rows", 10);
   const col = _get(board, "cols", 10);
@@ -16,9 +22,7 @@ function MainBoard({ board, user1, user2 }) {
   );
 
   const [boardState, setBoardState] = useState(
-    _get(board, "cells", [])
-      .flatMap((row) => row.split(""))
-      .map((cell) => (cell === "^" ? "" : cell)),
+    getBoardState(board),
   );
 
   const [currentUser, setCurrentUser] = useState(user1);
