@@ -1,31 +1,24 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import _get from "lodash/get";
 import "./MainBoard.css";
 import { placeTileAction } from "./MainBoard.actions";
 
-function MainBoard() {
-  const { state } = useLocation();
-
-  const boardData = state?.board;
-  const user1 = state?.user1;
-  const user2 = state?.user2;
-
-  const row = boardData?.rows || 10;
-  const col = boardData?.cols || 10;
+function MainBoard({ board, user1, user2 }) {
+  const row = _get(board, "rows", 10);
+  const col = _get(board, "cols", 10);
 
   const boardAreaWidth = window.innerWidth * 0.8;
   const boardAreaHeight = window.innerHeight;
 
   const cellSize = Math.min(
     boardAreaWidth / col,
-    boardAreaHeight / row
+    boardAreaHeight / row,
   );
 
-  const [board, setBoard] = useState(
-    boardData?.cells
+  const [boardState, setBoardState] = useState(
+    _get(board, "cells", [])
       .flatMap((row) => row.split(""))
-      .map((cell) => (cell === "^" ? "" : cell)) ??
-      Array.from({ length: row * col }, () => "")
+      .map((cell) => (cell === "^" ? "" : cell)),
   );
 
   const [currentUser, setCurrentUser] = useState(user1);
@@ -37,7 +30,7 @@ function MainBoard() {
       return;
     }
 
-    if (board[index] !== "") {
+    if (boardState[index] !== "") {
       return;
     }
 
@@ -57,12 +50,12 @@ function MainBoard() {
       return;
     }
 
-    const updatedBoard = [...board];
+    const updatedBoard = [...boardState];
     updatedBoard[index] = input;
-    setBoard(updatedBoard);
+    setBoardState(updatedBoard);
 
     setCurrentUser(
-      currentUser.id === user1.id ? user2 : user1
+      currentUser.id === user1.id ? user2 : user1,
     );
   };
 
@@ -78,7 +71,7 @@ function MainBoard() {
             gridTemplateRows: `repeat(${row}, ${cellSize}px)`,
           }}
         >
-          {board.map((value, index) => (
+          {boardState.map((value, index) => (
             <input
               key={index}
               className="board-cell"

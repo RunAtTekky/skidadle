@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
+import MainBoard from "../MainBoard/MainBoard";
 import { ACTION_HANDLERS } from "./LandingPage.actionHandlers";
 import { CUSTOM_ACTIONS } from "./LandingPage.constants";
 import "./landingpage.css";
@@ -9,8 +9,7 @@ import "./landingpage.css";
 function LandingPage() {
   const [row, setRow] = useState(10);
   const [col, setCol] = useState(10);
-
-  const navigate = useNavigate();
+  const [gameData, setGameData] = useState(null);
 
   const playGame = async () => {
     const data = await ACTION_HANDLERS[CUSTOM_ACTIONS.INITIALISE_GAME](
@@ -22,16 +21,19 @@ function LandingPage() {
       alert("Unable to start the game. Please try again.");
       return;
     }
-    console.log(data);
 
-   navigate("/board", {
-  state: {
-    board: data.board,
-    user1: data.user1,
-    user2: data.user2,
-  },
-});
+    setGameData(data);
   };
+
+  if (gameData) {
+    return (
+      <MainBoard
+        board={gameData.board}
+        user1={gameData.user1}
+        user2={gameData.user2}
+      />
+    );
+  }
 
   return (
     <div className="container">
