@@ -3,6 +3,9 @@ import _get from "lodash/get";
 import "./MainBoard.css";
 import { placeTileAction } from "./MainBoard.actions";
 
+const SINGLE_UPPERCASE_LETTER_REGEX = /^[A-Z]$/;
+const SINGLE_ALPHABET_CHARACTER_REGEX = /^[a-zA-Z]$/;
+
 function getBoardState(board) {
   return _get(board, "cells", [])
     .flatMap((row) => row.split(""))
@@ -30,7 +33,10 @@ function MainBoard({ board, user1, user2 }) {
   const handleInputChange = async (index, value) => {
     const input = value.toUpperCase();
 
-    if (input !== "" && !/^[A-Z]$/.test(input)) {
+    if (
+      input !== "" &&
+      !SINGLE_UPPERCASE_LETTER_REGEX.test(input)
+    ) {
       return;
     }
 
@@ -88,7 +94,7 @@ function MainBoard({ board, user1, user2 }) {
               onKeyDown={(e) => {
                 if (
                   e.key.length === 1 &&
-                  !/^[a-zA-Z]$/.test(e.key)
+                  !SINGLE_ALPHABET_CHARACTER_REGEX.test(e.key)
                 ) {
                   e.preventDefault();
                 }
