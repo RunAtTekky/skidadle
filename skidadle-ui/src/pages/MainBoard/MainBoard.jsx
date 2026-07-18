@@ -1,9 +1,9 @@
 import { useState } from "react";
 import _get from "lodash/get";
 import "./MainBoard.css";
-import { placeTileAction } from "./MainBoard.actions";
+import { ACTION_HANDLERS } from "./MainBoard.actionHandlers";
+import { CUSTOM_ACTIONS } from "./MainBoard.constants";
 
-const SINGLE_UPPERCASE_LETTER_REGEX = /^[A-Z]$/;
 const SINGLE_ALPHABET_CHARACTER_REGEX = /^[a-zA-Z]$/;
 
 function getBoardState(board) {
@@ -22,42 +22,7 @@ function MainBoard({ board, user1, user2 }) {
   const cellSize = Math.min(boardAreaWidth / col, boardAreaHeight / row);
 
   const [boardState, setBoardState] = useState(getBoardState(board));
-
   const [currentUser, setCurrentUser] = useState(user1);
-
-  const handleInputChange = async (index, value) => {
-    const input = value.toUpperCase();
-
-    if (input !== "" && !SINGLE_UPPERCASE_LETTER_REGEX.test(input)) {
-      return;
-    }
-
-    if (boardState[index] !== "") {
-      return;
-    }
-
-    const currentRow = Math.floor(index / col);
-    const currentCol = index % col;
-
-    const response = await placeTileAction({
-      id: currentUser.id,
-      boardId: currentUser.boardId,
-      row: currentRow,
-      col: currentCol,
-      ch: input,
-    });
-
-    if (!response.ok || !response.canPlace) {
-      alert(response.error);
-      return;
-    }
-
-    const updatedBoard = [...boardState];
-    updatedBoard[index] = input;
-    setBoardState(updatedBoard);
-
-    setCurrentUser(currentUser.id === user1.id ? user2 : user1);
-  };
 
   return (
     <div className="main-board">
@@ -78,7 +43,19 @@ function MainBoard({ board, user1, user2 }) {
               type="text"
               maxLength={1}
               value={value}
-              onChange={(e) => handleInputChange(index, e.target.value)}
+              onChange={(e) =>
+                ACTION_HANDLERS[CUSTOM_ACTIONS.HANDLE_INPUT_CHANGE](
+                  index,
+                  e.target.value,
+                  col,
+                  boardState,
+                  setBoardState,
+                  currentUser,
+                  setCurrentUser,
+                  user1,
+                  user2,
+                )
+              }
               onKeyDown={(e) => {
                 if (
                   e.key.length === 1 &&
