@@ -19,24 +19,16 @@ function MainBoard({ board, user1, user2 }) {
   const boardAreaWidth = window.innerWidth * 0.8;
   const boardAreaHeight = window.innerHeight;
 
-  const cellSize = Math.min(
-    boardAreaWidth / col,
-    boardAreaHeight / row,
-  );
+  const cellSize = Math.min(boardAreaWidth / col, boardAreaHeight / row);
 
-  const [boardState, setBoardState] = useState(
-    getBoardState(board),
-  );
+  const [boardState, setBoardState] = useState(getBoardState(board));
 
   const [currentUser, setCurrentUser] = useState(user1);
 
   const handleInputChange = async (index, value) => {
     const input = value.toUpperCase();
 
-    if (
-      input !== "" &&
-      !SINGLE_UPPERCASE_LETTER_REGEX.test(input)
-    ) {
+    if (input !== "" && !SINGLE_UPPERCASE_LETTER_REGEX.test(input)) {
       return;
     }
 
@@ -64,9 +56,7 @@ function MainBoard({ board, user1, user2 }) {
     updatedBoard[index] = input;
     setBoardState(updatedBoard);
 
-    setCurrentUser(
-      currentUser.id === user1.id ? user2 : user1,
-    );
+    setCurrentUser(currentUser.id === user1.id ? user2 : user1);
   };
 
   return (
@@ -88,9 +78,7 @@ function MainBoard({ board, user1, user2 }) {
               type="text"
               maxLength={1}
               value={value}
-              onChange={(e) =>
-                handleInputChange(index, e.target.value)
-              }
+              onChange={(e) => handleInputChange(index, e.target.value)}
               onKeyDown={(e) => {
                 if (
                   e.key.length === 1 &&
