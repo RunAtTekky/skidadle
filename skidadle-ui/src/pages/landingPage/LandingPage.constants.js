@@ -1,0 +1,3 @@
+export const CUSTOM_ACTIONS = {
+  INITIALISE_GAME: "INITIALISE_GAME",
+};

@@ -1,23 +1,39 @@
 import { useState } from "react";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
-import { ACTION_HANDLERS, PLAY_GAME } from "./LandingPage.actionHandlers";
+import MainBoard from "../MainBoard/MainBoard";
+import { ACTION_HANDLERS } from "./LandingPage.actionHandlers";
+import { CUSTOM_ACTIONS } from "./LandingPage.constants";
 import "./landingpage.css";
 
 function LandingPage() {
   const [row, setRow] = useState(10);
   const [col, setCol] = useState(10);
+  const [gameData, setGameData] = useState(null);
 
   const playGame = async () => {
-   const data = await ACTION_HANDLERS[PLAY_GAME](row, col);
+    const data = await ACTION_HANDLERS[CUSTOM_ACTIONS.INITIALISE_GAME](
+      row,
+      col,
+    );
 
     if (!data) {
       alert("Unable to start the game. Please try again.");
       return;
     }
 
-    console.log("Game initialized:", data);
+    setGameData(data);
   };
+
+  if (gameData) {
+    return (
+      <MainBoard
+        board={gameData.board}
+        user1={gameData.user1}
+        user2={gameData.user2}
+      />
+    );
+  }
 
   return (
     <div className="container">

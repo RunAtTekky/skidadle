@@ -1,4 +1,5 @@
 import { initializeGameAction } from "./LandingPage.actions";
+import { CUSTOM_ACTIONS } from "./LandingPage.constants";
 
 const handlePlayGame = async (row, col) => {
   try {
@@ -16,12 +17,11 @@ const handlePlayGame = async (row, col) => {
 
     return data;
   } catch (error) {
-    console.error(error);
     alert("Unable to connect to backend");
     return null;
   }
 };
 
 export const ACTION_HANDLERS = {
-  [PLAY_GAME]: handlePlayGame,
+  [CUSTOM_ACTIONS.INITIALISE_GAME]: handlePlayGame,
 };
