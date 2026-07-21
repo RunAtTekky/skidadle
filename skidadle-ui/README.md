@@ -55,7 +55,7 @@ skidadle-ui/
 
 3. Delete the file name
 
-`yearn.lock` 
+`yarn.lock` 
 
 4. Install Dependencies
 
