@@ -1,135 +1,16 @@
-# Skidadle Frontend
+# React + Vite
 
-Frontend application for **Skidadle**, built using **React**.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-- Offline and Online Gameplay
-- User-friendly interface
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Tech Stack
+## Expanding the ESLint configuration
 
-- React
-- CSS
-
----
-
-## Folder Structure
-
-```text
-skidadle-ui/
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   │   ├── Button/
-│   │   │   ├── Button.jsx
-│   │   │   └── Button.css
-│   │   └── TextInput/
-│   │       ├── TextInput.jsx
-│   │       └── TextInput.css
-│   │
-│   ├── pages/
-│   │   ├── landingPage/
-│   │   │   ├── LandingPage.actions.js
-│   │   │   ├── LandingPage.actionHandlers.js
-│   │   │   ├── LandingPage.constants.js
-│   │   │   ├── LandingPage.services.js
-│   │   │   ├── landingpage.jsx
-│   │   │   └── landingpage.css
-│   │   │
-│   │   └── MainBoard/
-│   │       ├── MainBoard.actions.js
-│   │       ├── MainBoard.actionHandlers.js
-│   │       ├── MainBoard.constants.js
-│   │       ├── MainBoard.services.js
-│   │       ├── MainBoard.jsx
-│   │       └── MainBoard.css
-│   │
-│   ├── App.jsx
-│   ├── App.css
-│   ├── constants.js
-│   ├── index.css
-│   └── main.jsx
-│
-├── .env.example
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
----
-
-## File Naming Convention
-
-Each page follows the same modular structure:
-
-- `*.actions.js` – Defines actions triggered by the UI.
-- `*.actionHandlers.js` – Contains the logic for handling actions.
-- `*.services.js` – Handles API calls and external services.
-- `*.constants.js` – Stores constants used by the page.
-- `*.jsx` – React component for the page.
-- `*.css` – Styles for the page.
-
----
-
-# Project Setup
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/RunAtTekky/skidadle.git
-```
-
-### 2. Navigate to the frontend directory
-
-```bash
-cd skidadle-ui
-```
-
-### 3. Install project dependencies
-
-```bash
-yarn install
-```
-
----
-
-# Backend Setup
-
-### 1. Create a `.env` file
-
-Create a new `.env` file inside `skidadle-ui`.
-
-### 2. Copy environment variables
-
-```text
-cp .env.example .env
-```
-
-### 3. Configure the Backend URL
-
-Update the backend API URL in the `.env` file.
-
-project documentation provides the backend URL in `CONTRIBUTING.md`, copy it from there and paste it into the corresponding environment variable.
-
-Example:
-
-```env
-VITE_BACKEND_URL = https://skidadle-backend.onrender.com/api/skidadle
-```
-
----
-
-# Run the Application
-
-Once the backend is running and the environment variables are configured, start the frontend:
-
-```bash
-yarn dev
-```
-
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
