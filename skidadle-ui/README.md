@@ -95,8 +95,12 @@ Each page follows the same structure:
 
 4. Install Dependencies
 
-`yarn install` or `yarn i`
+`yarn install`
 
-5. Start frontend server
+5. Add dependencies 
 
-`yarn run dev`
+`yarn add loadash, react-router-dom`
+
+6. Start frontend server
+
+`yarn dev`
