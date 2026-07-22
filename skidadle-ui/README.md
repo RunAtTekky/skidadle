@@ -8,8 +8,6 @@ Frontend application for **Skidadle**, built using **React**.
 
 - Offline and Online Gameplay
 - User-friendly interface
-- Custom room creation
-- Customizable grid size
 
 ---
 
