@@ -66,7 +66,7 @@ skidadle-ui/
 
 ## File Naming Convention
 
-Each page follows the same modular structure:
+Each page follows the same file structure:
 
 - `*.actions.js` – Defines actions triggered by the UI.
 - `*.actionHandlers.js` – Contains the logic for handling actions.
