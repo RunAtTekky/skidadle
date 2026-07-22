@@ -16,36 +16,72 @@ Frontend application for Skidadle built using React.
 ## Tech Stack 
 
 - React
-- Vite
 - CSS
-- React Router
 
 --- 
 
 ## Folder Structure 
 
+```text
 skidadle-ui/
-│
 ├── public/
 ├── src/
-│   ├── assets/
+│   ├── assets/                    
 │   ├── components/
+│   │   ├── Button/
+│   │   │   ├── Button.jsx
+│   │   │   └── Button.css
+│   │   └── TextInput/
+│   │       ├── TextInput.jsx
+│   │       └── TextInput.css
+│   │
 │   ├── pages/
+│   │   ├── landingPage/
+│   │   │   ├── LandingPage.actions.js
+│   │   │   ├── LandingPage.actionHandlers.js
+│   │   │   ├── LandingPage.constants.js
+│   │   │   ├── LandingPage.services.js
+│   │   │   ├── landingpage.jsx
+│   │   │   └── landingpage.css
+│   │   │
+│   │   └── MainBoard/
+│   │       ├── MainBoard.actions.js
+│   │       ├── MainBoard.actionHandlers.js
+│   │       ├── MainBoard.constants.js
+│   │       ├── MainBoard.services.js
+│   │       ├── MainBoard.jsx
+│   │       └── MainBoard.css
+│   │
 │   ├── App.jsx
+│   ├── App.css
 │   ├── constants.js
 │   ├── index.css
-│   ├── main.jsx
-│   └── App.css
+│   └── main.jsx
 │
 ├── .env.example
 ├── package.json
 ├── vite.config.js
 └── README.md
+```
 
+---
 
-#Project Setup
+## File Naming Convention
 
-1. Clone Respository
+Each page follows the same structure:
+
+- `*.actions.js` – Defines actions triggered by the UI.
+- `*.actionHandlers.js` – Contains logic to handle actions.
+- `*.services.js` – Handles API calls and external services.
+- `*.constants.js` – Stores constants used by the page.
+- `*.jsx` – React component for the page.
+- `*.css` – Styles for the page.
+
+---
+
+## Project Setup
+
+1. Clone Repository
 
 `git clone https://github.com/RunAtTekky/skidadle.git`
 
@@ -59,8 +95,8 @@ skidadle-ui/
 
 4. Install Dependencies
 
-`npm install` or `npm i`
+`yarn install` or `yarn i`
 
 5. Start frontend server
 
-`npm run dev`
+`yarn run dev`
