@@ -93,22 +93,10 @@ git clone https://github.com/RunAtTekky/skidadle.git
 cd skidadle-ui
 ```
 
-### 3. Remove the existing lock file (if present)
-
-```bash
-rm yarn.lock
-```
-
-### 4. Install project dependencies
+### 3. Install project dependencies
 
 ```bash
 yarn install
-```
-
-### 5. Install additional dependencies
-
-```bash
-yarn add lodash react-router-dom
 ```
 
 ---
@@ -117,20 +105,12 @@ yarn add lodash react-router-dom
 
 ### 1. Create a `.env` file
 
-Create a new `.env` file in the skidadle-ui.
+Create a new `.env` file inside `skidadle-ui`.
 
 ### 2. Copy environment variables
 
-Copy all the variables from:
-
 ```text
-.env.example
-```
-
-into your newly created:
-
-```text
-.env
+cp .env.example .env
 ```
 
 ### 3. Configure the Backend URL
@@ -142,7 +122,7 @@ project documentation provides the backend URL in `CONTRIBUTING.md`, copy it fro
 Example:
 
 ```env
-VITE_BACKEND_URL=<Backend URL from CONTRIBUTING.md>
+VITE_BACKEND_URL = https://skidadle-backend.onrender.com/api/skidadle
 ```
 
 ---
