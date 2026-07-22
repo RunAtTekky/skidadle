@@ -1,32 +1,32 @@
 # Skidadle Frontend
 
-Frontend application for Skidadle built using React.
+Frontend application for **Skidadle**, built using **React**.
 
 ---
 
 ## Features
 
-- Offline and Online Gameplay available
-- User friendly UI
+- Offline and Online Gameplay
+- User-friendly interface
 - Custom room creation
-- Custom grid size 
+- Customizable grid size
 
 ---
 
-## Tech Stack 
+## Tech Stack
 
 - React
 - CSS
 
---- 
+---
 
-## Folder Structure 
+## Folder Structure
 
 ```text
 skidadle-ui/
 ├── public/
 ├── src/
-│   ├── assets/                    
+│   ├── assets/
 │   ├── components/
 │   │   ├── Button/
 │   │   │   ├── Button.jsx
@@ -68,10 +68,10 @@ skidadle-ui/
 
 ## File Naming Convention
 
-Each page follows the same structure:
+Each page follows the same modular structure:
 
 - `*.actions.js` – Defines actions triggered by the UI.
-- `*.actionHandlers.js` – Contains logic to handle actions.
+- `*.actionHandlers.js` – Contains the logic for handling actions.
 - `*.services.js` – Handles API calls and external services.
 - `*.constants.js` – Stores constants used by the page.
 - `*.jsx` – React component for the page.
@@ -79,28 +79,79 @@ Each page follows the same structure:
 
 ---
 
-## Project Setup
+# Project Setup
 
-1. Clone Repository
+### 1. Clone the repository
 
-`git clone https://github.com/RunAtTekky/skidadle.git`
+```bash
+git clone https://github.com/RunAtTekky/skidadle.git
+```
 
-2. Navigate to frontend folder
+### 2. Navigate to the frontend directory
 
-`cd skidadle-ui`
+```bash
+cd skidadle-ui
+```
 
-3. Delete the file name
+### 3. Remove the existing lock file (if present)
 
-`yarn.lock` 
+```bash
+rm yarn.lock
+```
 
-4. Install Dependencies
+### 4. Install project dependencies
 
-`yarn install`
+```bash
+yarn install
+```
 
-5. Add dependencies 
+### 5. Install additional dependencies
 
-`yarn add loadash, react-router-dom`
+```bash
+yarn add lodash react-router-dom
+```
 
-6. Start frontend server
+---
 
-`yarn dev`
+# Backend Setup
+
+### 1. Create a `.env` file
+
+Create a new `.env` file in the project root.
+
+### 2. Copy environment variables
+
+Copy all the variables from:
+
+```text
+.env.example
+```
+
+into your newly created:
+
+```text
+.env
+```
+
+### 3. Configure the Backend URL
+
+Update the backend API URL in the `.env` file.
+
+project documentation provides the backend URL in `CONTRIBUTING.md`, copy it from there and paste it into the corresponding environment variable.
+
+Example:
+
+```env
+VITE_BACKEND_URL=<Backend URL from CONTRIBUTING.md>
+```
+
+---
+
+# Run the Application
+
+Once the backend is running and the environment variables are configured, start the frontend:
+
+```bash
+yarn dev
+```
+
