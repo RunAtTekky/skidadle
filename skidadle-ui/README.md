@@ -117,7 +117,7 @@ yarn add lodash react-router-dom
 
 ### 1. Create a `.env` file
 
-Create a new `.env` file in the project root.
+Create a new `.env` file in the skidadle-ui.
 
 ### 2. Copy environment variables
 
