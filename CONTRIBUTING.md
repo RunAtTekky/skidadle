@@ -37,10 +37,10 @@ Create a `.env` file inside `skidadle-ui` and add:
 cd skidadle-ui
 
 # Install frontend dependencies
-npm install
+yarn install
 
 # Start the frontend development server
-npm run dev
+yarn dev
 ```
 
 The frontend will now send API requests to the deployed backend.
@@ -49,3 +49,29 @@ The frontend will now send API requests to the deployed backend.
 We are using Spring Boot
 Lombok must be used throughout the project
                                         
+### Git Commit Messages
+
+We follow the widely-used guidelines from [How to Write a Git Commit Message](https://cbea.ms/git-commit/). New contributors should skim the full article, but the summary is:
+
+1. **Separate subject from body with a blank line** — the first line is the summary, everything after a blank line is the detailed explanation.
+2. **Limit the subject line to 50 characters** — treat this as a soft target and 72 as the hard cap.
+3. **Capitalize the subject line** — e.g. `Fix login redirect bug`, not `fix login redirect bug`.
+4. **Do not end the subject line with a period** — punctuation wastes space and isn't needed.
+5. **Use the imperative mood in the subject line** — write it as a command, e.g. `Add unit tests for OrderService`, not `Added unit tests` or `Adding unit tests`. A good check: the subject should complete the sentence *"If applied, this commit will ___."*
+6. **Wrap the body at 72 characters** — Git doesn't wrap text for you, so keep lines readable manually.
+7. **Use the body to explain *what* and *why*, not *how*** — the diff already shows how the code changed; the message should explain the reasoning and context behind the change.
+
+Example:
+
+```
+Add retry logic to matchmaking service
+
+Matchmaking requests were failing silently under high load,
+causing players to get stuck in the queue. This adds exponential
+backoff retries so transient failures don't require a manual
+restart.
+
+Resolves: #142
+```
+
+- If your commit is small and self-explanatory (e.g. a typo fix), a single-line subject is fine — no body required.
