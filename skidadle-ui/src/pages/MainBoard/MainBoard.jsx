@@ -6,6 +6,9 @@ import { CUSTOM_ACTIONS } from "./MainBoard.constants";
 
 const SINGLE_ALPHABET_CHARACTER_REGEX = /^[a-zA-Z]$/;
 
+const CELL_GAP = 12;
+const BOARD_PADDING = 20;
+
 function getBoardState(board) {
   return _get(board, "cells", [])
     .flatMap((row) => row.split(""))
@@ -16,10 +19,13 @@ function MainBoard({ board, user1, user2 }) {
   const row = _get(board, "rows", 10);
   const col = _get(board, "cols", 10);
 
-  const boardAreaWidth = window.innerWidth * 0.8;
-  const boardAreaHeight = window.innerHeight;
+  const boardAreaWidth = window.innerWidth * 0.8 - BOARD_PADDING * 2;
+  const boardAreaHeight = window.innerHeight - BOARD_PADDING * 2;
 
-  const cellSize = Math.min(boardAreaWidth / col, boardAreaHeight / row);
+  const cellSize = Math.min(
+    (boardAreaWidth - CELL_GAP * (col - 1)) / col,
+    (boardAreaHeight - CELL_GAP * (row - 1)) / row,
+  );
 
   const [boardState, setBoardState] = useState(getBoardState(board));
   const [currentUser, setCurrentUser] = useState(user1);
@@ -30,8 +36,10 @@ function MainBoard({ board, user1, user2 }) {
         <div
           className="board-grid"
           style={{
-            width: `${cellSize * col}px`,
-            height: `${cellSize * row}px`,
+            gap: `${CELL_GAP}px`,
+            padding: `${BOARD_PADDING}px`,
+            width: `${cellSize * col + CELL_GAP * (col - 1) + BOARD_PADDING * 2}px`,
+            height: `${cellSize * row + CELL_GAP * (row - 1) + BOARD_PADDING * 2}px`,
             gridTemplateColumns: `repeat(${col}, ${cellSize}px)`,
             gridTemplateRows: `repeat(${row}, ${cellSize}px)`,
           }}
