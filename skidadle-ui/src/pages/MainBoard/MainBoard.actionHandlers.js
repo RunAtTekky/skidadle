@@ -13,6 +13,7 @@ const handleInputChange = async (
   setCurrentUser,
   user1,
   user2,
+  setHighlightedCells,
 ) => {
   const input = value.toUpperCase();
 
@@ -43,6 +44,8 @@ const handleInputChange = async (
   const updatedBoard = [...boardState];
   updatedBoard[index] = input;
   setBoardState(updatedBoard);
+
+  setHighlightedCells(response.highlightedCells ?? []);
 
   setCurrentUser(currentUser.id === user1.id ? user2 : user1);
 };
