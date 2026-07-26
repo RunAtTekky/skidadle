@@ -49,29 +49,13 @@ The frontend will now send API requests to the deployed backend.
 We are using Spring Boot
 Lombok must be used throughout the project
                                         
-### Git Commit Messages
+### Git Commit Messages Guidelines
 
-We follow the widely-used guidelines from [How to Write a Git Commit Message](https://cbea.ms/git-commit/). New contributors should skim the full article, but the summary is:
+1. **Separate subject from body with a blank line** — the first line will be subject, and after put a blank line and then start rest of the body (description, if needed).
+2. **Limit the subject line to 50 characters** — try to make the subject line within 50 characters (not a hard limit though).
+3. **Capitalize the subject line** — begin all subject lines with a capital letter.
+4. **Do not end the subject line with a period** — no need of punctuation at the end of line.
+5. **Use the imperative mood in the subject line** — write it as a command, e.g. `Add unit tests for OrderService`, not `Added unit tests` or `Adding unit tests`. 
+6. **Use the body to explain *what* and *why*, not *how*** — the body must contain the reason of the commit, not how its implemented.
 
-1. **Separate subject from body with a blank line** — the first line is the summary, everything after a blank line is the detailed explanation.
-2. **Limit the subject line to 50 characters** — treat this as a soft target and 72 as the hard cap.
-3. **Capitalize the subject line** — e.g. `Fix login redirect bug`, not `fix login redirect bug`.
-4. **Do not end the subject line with a period** — punctuation wastes space and isn't needed.
-5. **Use the imperative mood in the subject line** — write it as a command, e.g. `Add unit tests for OrderService`, not `Added unit tests` or `Adding unit tests`. A good check: the subject should complete the sentence *"If applied, this commit will ___."*
-6. **Wrap the body at 72 characters** — Git doesn't wrap text for you, so keep lines readable manually.
-7. **Use the body to explain *what* and *why*, not *how*** — the diff already shows how the code changed; the message should explain the reasoning and context behind the change.
-
-Example:
-
-```
-Add retry logic to matchmaking service
-
-Matchmaking requests were failing silently under high load,
-causing players to get stuck in the queue. This adds exponential
-backoff retries so transient failures don't require a manual
-restart.
-
-Resolves: #142
-```
-
-- If your commit is small and self-explanatory (e.g. a typo fix), a single-line subject is fine — no body required.
+- For more details visit [How to Write a Git Commit Message](https://cbea.ms/git-commit/).
