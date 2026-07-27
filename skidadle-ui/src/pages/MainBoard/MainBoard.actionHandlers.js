@@ -1,5 +1,9 @@
+import _get from "lodash/get";
 import { placeTileAction } from "./MainBoard.actions";
-import { CUSTOM_ACTIONS } from "./MainBoard.constants";
+import {
+  CUSTOM_ACTIONS,
+  HIGHLIGHT_DURATION_MS,
+} from "./MainBoard.constants";
 
 const SINGLE_UPPERCASE_LETTER_REGEX = /^[A-Z]$/;
 
@@ -45,11 +49,11 @@ const handleInputChange = async (
   updatedBoard[index] = input;
   setBoardState(updatedBoard);
 
-  setHighlightedCells(response.highlightedCells ?? []);
+  setHighlightedCells(_get(response, "highlightedCells", []));
 
   setTimeout(() => {
     setHighlightedCells([]);
-  }, 1000);
+  }, HIGHLIGHT_DURATION_MS);
 
   setCurrentUser(currentUser.id === user1.id ? user2 : user1);
 };
