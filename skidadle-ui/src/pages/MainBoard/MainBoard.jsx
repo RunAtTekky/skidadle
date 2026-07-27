@@ -29,6 +29,7 @@ function MainBoard({ board, user1, user2 }) {
 
   const [boardState, setBoardState] = useState(getBoardState(board));
   const [currentUser, setCurrentUser] = useState(user1);
+  const [highlightedCells, setHighlightedCells] = useState([]);
 
   return (
     <div className="main-board">
@@ -44,36 +45,48 @@ function MainBoard({ board, user1, user2 }) {
             gridTemplateRows: `repeat(${row}, ${cellSize}px)`,
           }}
         >
-          {boardState.map((value, index) => (
-            <input
-              key={index}
-              className="board-cell"
-              type="text"
-              maxLength={1}
-              value={value}
-              onChange={(e) =>
-                ACTION_HANDLERS[CUSTOM_ACTIONS.HANDLE_INPUT_CHANGE](
-                  index,
-                  e.target.value,
-                  col,
-                  boardState,
-                  setBoardState,
-                  currentUser,
-                  setCurrentUser,
-                  user1,
-                  user2,
-                )
-              }
-              onKeyDown={(e) => {
-                if (
-                  e.key.length === 1 &&
-                  !SINGLE_ALPHABET_CHARACTER_REGEX.test(e.key)
-                ) {
-                  e.preventDefault();
+          {boardState.map((value, index) => {
+            const currentRow = Math.floor(index / col);
+            const currentCol = index % col;
+
+            const isHighlighted = highlightedCells.some(
+              (cell) =>
+                cell.row === currentRow &&
+                cell.col === currentCol,
+            );
+
+            return (
+              <input
+                key={index}
+                className={`board-cell ${isHighlighted ? "highlighted-cell" : ""}`}
+                type="text"
+                maxLength={1}
+                value={value}
+                onChange={(e) =>
+                  ACTION_HANDLERS[CUSTOM_ACTIONS.HANDLE_INPUT_CHANGE](
+                    index,
+                    e.target.value,
+                    col,
+                    boardState,
+                    setBoardState,
+                    currentUser,
+                    setCurrentUser,
+                    user1,
+                    user2,
+                    setHighlightedCells,
+                  )
                 }
-              }}
-            />
-          ))}
+                onKeyDown={(e) => {
+                  if (
+                    e.key.length === 1 &&
+                    !SINGLE_ALPHABET_CHARACTER_REGEX.test(e.key)
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            );
+          })}
         </div>
 
         <div className="board-sidebar">

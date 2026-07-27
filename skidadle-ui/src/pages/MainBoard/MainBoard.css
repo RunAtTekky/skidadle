@@ -73,3 +73,7 @@
   font-size: 18px;
   font-weight: bold;
 }
+.highlighted-cell {
+  background-color: #facc15;
+  color: #111111;
+}
