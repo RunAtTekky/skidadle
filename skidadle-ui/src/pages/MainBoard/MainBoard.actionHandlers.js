@@ -47,6 +47,10 @@ const handleInputChange = async (
 
   setHighlightedCells(response.highlightedCells ?? []);
 
+  setTimeout(() => {
+    setHighlightedCells([]);
+  }, 1000);
+
   setCurrentUser(currentUser.id === user1.id ? user2 : user1);
 };
 
