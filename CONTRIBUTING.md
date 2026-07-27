@@ -8,6 +8,17 @@ AI slop is not welcome, code is sacred.
 ## Setup
 [Check setup instructions here](/README.md#setup--run)
 
+## Setup
+
+### Prerequisites
+- Node.js (v18 or higher) & Yarn
+- Java 17 or higher (for Backend)
+
+### Frontend Setup (`skidadle-ui`)
+1. Navigate to the frontend directory:
+   ```bash
+   cd skidadle-ui
+
 ## Pull Request Process
 - Nothing must be committed to main branch directly
 - All changes to main should be made through PRs
