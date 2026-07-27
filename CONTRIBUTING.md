@@ -37,15 +37,26 @@ Create a `.env` file inside `skidadle-ui` and add:
 cd skidadle-ui
 
 # Install frontend dependencies
-npm install
+yarn install
 
 # Start the frontend development server
-npm run dev
+yarn dev
 ```
 
 The frontend will now send API requests to the deployed backend.
 
 ### Backend
 We are using Spring Boot
+
 Lombok must be used throughout the project
                                         
+### Git Commit Messages Guidelines
+
+1. **Separate subject from body with a blank line** - the first line will be subject, and after put a blank line and then start rest of the body (description, if needed).
+2. **Limit the subject line to 50 characters** - try to make the subject line within 50 characters (not a hard limit though).
+3. **Capitalize the subject line** - begin all subject lines with a capital letter.
+4. **Do not end the subject line with a period** - no need of punctuation at the end of line.
+5. **Use the imperative mood in the subject line** - write it as a command, e.g. `Add unit tests for OrderService`, not `Added unit tests` or `Adding unit tests`. 
+6. **Use the body to explain *what* and *why*, not *how*** - the body must contain the reason of the commit, not how its implemented.
+
+- For more details visit [How to Write a Git Commit Message](https://cbea.ms/git-commit/).
