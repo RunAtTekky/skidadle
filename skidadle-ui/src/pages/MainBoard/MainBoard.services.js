@@ -17,4 +17,14 @@ export const mainBoardApi = {
       ...data,
     };
   },
+
+  getScore: async (id) => {
+    const response = await fetch(`${API.GET_SCORE}?id=${id}`);
+    const data = await response.json();
+
+    return {
+      ok: response.ok,
+      ...data,
+    };
+  },
 };

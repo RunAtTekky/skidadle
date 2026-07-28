@@ -1,5 +1,5 @@
 import _get from "lodash/get";
-import { placeTileAction } from "./MainBoard.actions";
+import { getScoreAction, placeTileAction } from "./MainBoard.actions";
 import {
   CUSTOM_ACTIONS,
   HIGHLIGHT_DURATION_MS,
@@ -18,6 +18,7 @@ const handleInputChange = async (
   user1,
   user2,
   setHighlightedCells,
+  setScores,
 ) => {
   const input = value.toUpperCase();
 
@@ -43,6 +44,15 @@ const handleInputChange = async (
   if (!response.ok || !response.canPlace) {
     alert(response.error);
     return;
+  }
+
+  const scoreResponse = await getScoreAction(currentUser.id);
+
+  if(scoreResponse.ok){
+    setScores((prev) => ({
+      ...prev,
+      [currentUser.id]: scoreResponse.score,
+    }));
   }
 
   const updatedBoard = [...boardState];

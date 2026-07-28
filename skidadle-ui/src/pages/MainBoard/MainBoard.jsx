@@ -30,6 +30,10 @@ function MainBoard({ board, user1, user2 }) {
   const [boardState, setBoardState] = useState(getBoardState(board));
   const [currentUser, setCurrentUser] = useState(user1);
   const [highlightedCells, setHighlightedCells] = useState([]);
+  const [scores, setScores] = useState({
+    [user1.id]: user1.totalScore,
+    [user2.id]: user2.totalScore,
+  });
 
   return (
     <div className="main-board">
@@ -74,6 +78,7 @@ function MainBoard({ board, user1, user2 }) {
                     user1,
                     user2,
                     setHighlightedCells,
+                    setScores,
                   )
                 }
                 onKeyDown={(e) => {
@@ -91,6 +96,16 @@ function MainBoard({ board, user1, user2 }) {
 
         <div className="board-sidebar">
           <h2>POINTS</h2>
+          <div className="score-list">
+            <div className="score-row">
+              <span>Player 1</span>
+              <span>{scores[user1.id]}</span>
+            </div>
+            <div className="score-row">
+              <span>Player 2</span>
+              <span>{scores[user2.id]}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

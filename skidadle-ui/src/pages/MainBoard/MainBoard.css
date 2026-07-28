@@ -66,14 +66,30 @@
 
   display: flex;
   justify-content: center;
-  align-items: flex-start;
 
   padding-top: 20px;
 
   font-size: 18px;
   font-weight: bold;
+
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 .highlighted-cell {
   background-color: #facc15;
   color: #111111;
+}
+
+.score-list{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.score-row{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
