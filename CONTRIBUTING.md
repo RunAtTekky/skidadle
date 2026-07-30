@@ -6,7 +6,18 @@ The aim is to collaborate and improve efficiency of the team.
 AI slop is not welcome, code is sacred.
 
 ## Setup
-[Check setup instructions here](/README.md#setup--run)
+### Backend (Spring Boot)
+```bash
+cd Skidadle-backend
+./gradlew bootRun
+```
+
+### Frontend (React + Vite)
+```bash
+cd skidadle-ui
+yarn install
+yarn dev
+```
 
 ## Pull Request Process
 - Nothing must be committed to main branch directly
