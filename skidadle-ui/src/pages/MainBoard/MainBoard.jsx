@@ -1,5 +1,6 @@
 import { useState } from "react";
 import _get from "lodash/get";
+import ScoreBoard from "../../components/ScoreBoard/ScoreBoard";
 import "./MainBoard.css";
 import { ACTION_HANDLERS } from "./MainBoard.actionHandlers";
 import { CUSTOM_ACTIONS } from "./MainBoard.constants";
@@ -96,16 +97,7 @@ function MainBoard({ board, user1, user2 }) {
 
         <div className="board-sidebar">
           <h2>POINTS</h2>
-          <div className="score-list">
-            <div className="score-row">
-              <span>Player 1</span>
-              <span>{scores[user1.id]}</span>
-            </div>
-            <div className="score-row">
-              <span>Player 2</span>
-              <span>{scores[user2.id]}</span>
-            </div>
-          </div>
+            <ScoreBoard user1 = {user1} user2 = {user2} scores = {scores} />
         </div>
       </div>
     </div>

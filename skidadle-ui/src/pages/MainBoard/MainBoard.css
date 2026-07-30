@@ -81,15 +81,3 @@
   color: #111111;
 }
 
-.score-list{
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.score-row{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
