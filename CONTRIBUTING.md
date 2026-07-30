@@ -41,7 +41,7 @@ The backend URL is:
 
 Create a `.env` file inside `skidadle-ui` and add:
 
-`VITE_API_BASE_URL=https://skidadle-backend.onrender.com/api/skidadle`
+`VITE_SKIDADLE_API_URL=https://skidadle-backend.onrender.com/api/skidadle`
 
 ```bash
 # Navigate to the frontend directory
