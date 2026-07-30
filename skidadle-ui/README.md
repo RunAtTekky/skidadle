@@ -120,7 +120,7 @@ project documentation provides the backend URL in `CONTRIBUTING.md`, copy it fro
 Example:
 
 ```env
-VITE_BACKEND_URL = https://skidadle-backend.onrender.com/api/skidadle
+VITE_SKIDADLE_API_URL = https://skidadle-backend.onrender.com/api/skidadle
 ```
 
 ---
