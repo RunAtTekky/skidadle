@@ -1,5 +1,6 @@
 import { useState } from "react";
 import _get from "lodash/get";
+import ScoreCard from "../../components/ScoreBoard/ScoreCard";
 import "./MainBoard.css";
 import { ACTION_HANDLERS } from "./MainBoard.actionHandlers";
 import { CUSTOM_ACTIONS } from "./MainBoard.constants";
@@ -30,10 +31,18 @@ function MainBoard({ board, user1, user2 }) {
   const [boardState, setBoardState] = useState(getBoardState(board));
   const [currentUser, setCurrentUser] = useState(user1);
   const [highlightedCells, setHighlightedCells] = useState([]);
+  const [scores, setScores] = useState({
+    [user1.id]: user1.totalScore,
+    [user2.id]: user2.totalScore,
+  });
 
   return (
     <div className="main-board">
       <div className="board-container">
+        <div className="player-score-panel">
+          <ScoreCard label="Player 1" score={scores[user1.id]} isActive = {currentUser.id === user1.id} />
+        </div>
+
         <div
           className="board-grid"
           style={{
@@ -74,6 +83,7 @@ function MainBoard({ board, user1, user2 }) {
                     user1,
                     user2,
                     setHighlightedCells,
+                    setScores,
                   )
                 }
                 onKeyDown={(e) => {
@@ -89,8 +99,8 @@ function MainBoard({ board, user1, user2 }) {
           })}
         </div>
 
-        <div className="board-sidebar">
-          <h2>POINTS</h2>
+        <div className="player-score-panel">
+          <ScoreCard label="Player 2" score={scores[user2.id]} isActive = {currentUser.id === user2.id}/>
         </div>
       </div>
     </div>
