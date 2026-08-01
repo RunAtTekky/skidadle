@@ -33,8 +33,8 @@ public class GameLogic {
         CellRange horizontalSS = horizontalSearchSpace(gs, row, col, ch);
         CellRange verticalSS = verticalSearchSpace(gs, row, col, ch);
 
-        CellRange largestHorizontalWord = findLargestValidWord(horizontalSS);
-        CellRange largestVerticalWord = findLargestValidWord(verticalSS);
+        CellRange largestHorizontalWord = findLargestValidWord(horizontalSS, col);
+        CellRange largestVerticalWord = findLargestValidWord(verticalSS, row);
 
         int scoreGained = largestHorizontalWord.getLength() + largestVerticalWord.getLength() - 1;
         if (scoreGained == -1) scoreGained = 0;
@@ -71,7 +71,7 @@ public class GameLogic {
         return new CellRange(starting, finishing, text);
     }
 
-    public CellRange findLargestValidWord(CellRange searchSpace) {
+    public CellRange findLargestValidWord(CellRange searchSpace, int fixedPosition) {
         String text = searchSpace.getText();
 
         CellRange result = new CellRange(0, 0, "");
@@ -79,12 +79,18 @@ public class GameLogic {
         int n = text.length();
         for (int i=0; i<n; i++) {
             for (int j=i; j<n; j++) {
+                int start = searchSpace.getStart() + i;
+                int end = searchSpace.getStart() + j;
+
+                boolean isBetween = start <= fixedPosition && fixedPosition <= end;
+                if (!isBetween) continue;
+
                 String word = text.substring(i, j+1);
                 if (!dictionaryService.isValidWord(word)) continue;
 
                 int currLength = result.getLength();
                 if (word.length() >= currLength) {
-                    result = new CellRange(i + searchSpace.getStart(), j + searchSpace.getStart(), word);
+                    result = new CellRange(start, end, word);
                 }
             }
         }
