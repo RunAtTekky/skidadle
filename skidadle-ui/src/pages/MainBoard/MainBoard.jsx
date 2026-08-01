@@ -40,7 +40,11 @@ function MainBoard({ board, user1, user2 }) {
     <div className="main-board">
       <div className="board-container">
         <div className="player-score-panel">
-          <ScoreCard label="Player 1" score={scores[user1.id]} isActive = {currentUser.id === user1.id} />
+          <ScoreCard
+            label="Player 1"
+            score={scores[user1.id]}
+            isActive={currentUser.id === user1.id}
+          />
         </div>
 
         <div
@@ -59,9 +63,7 @@ function MainBoard({ board, user1, user2 }) {
             const currentCol = index % col;
 
             const isHighlighted = highlightedCells.some(
-              (cell) =>
-                cell.row === currentRow &&
-                cell.col === currentCol,
+              (cell) => cell.row === currentRow && cell.col === currentCol,
             );
 
             return (
@@ -71,6 +73,12 @@ function MainBoard({ board, user1, user2 }) {
                 type="text"
                 maxLength={1}
                 value={value}
+                readOnly={value !== ""}
+                onFocus={(e) => {
+                  if (value !== "") {
+                    e.target.blur();
+                  }
+                }}
                 onChange={(e) =>
                   ACTION_HANDLERS[CUSTOM_ACTIONS.HANDLE_INPUT_CHANGE](
                     index,
@@ -100,7 +108,11 @@ function MainBoard({ board, user1, user2 }) {
         </div>
 
         <div className="player-score-panel">
-          <ScoreCard label="Player 2" score={scores[user2.id]} isActive = {currentUser.id === user2.id}/>
+          <ScoreCard
+            label="Player 2"
+            score={scores[user2.id]}
+            isActive={currentUser.id === user2.id}
+          />
         </div>
       </div>
     </div>
