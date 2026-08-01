@@ -113,14 +113,34 @@ cp .env.example .env
 
 ### 3. Configure the Backend URL
 
-Update the backend API URL in the `.env` file.
+Skidadle provides the following deployed environments.
 
-project documentation provides the backend URL in `CONTRIBUTING.md`, copy it from there and paste it into the corresponding environment variable.
+#### Production
 
-Example:
+Frontend:
+
+`https://skidadle.runat.xyz`
+
+Backend:
+
+`https://skidadle.onrender.com/api/skidadle`
+
+#### Testing
+
+Frontend:
+
+`https://skidadle-tst.runat.xyz`
+
+Backend:
+
+`https://skidadle-backend.onrender.com/api/skidadle`
+
+Create a `.env` file and set the backend URL depending on the environment you want to connect to.
+
+For example, to use the testing environment:
 
 ```env
-VITE_SKIDADLE_API_URL = https://skidadle-backend.onrender.com/api/skidadle
+VITE_SKIDADLE_API_URL=https://skidadle-backend.onrender.com/api/skidadle
 ```
 
 ---
@@ -132,4 +152,3 @@ Once the backend is running and the environment variables are configured, start 
 ```bash
 yarn dev
 ```
-
