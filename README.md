@@ -1,4 +1,5 @@
 # Skidadle Word Game
+
 Bringing my childhood game to the internet.
 
 Skidadle is a turn based game,
@@ -18,30 +19,60 @@ They get 4 points, as SOUL consists of 4 characters.
 The player with the higher score wins.
 
 ## Offline vs Online Gameplay
+
 ### Offline Gameplay
+
 Users can play the game with their own friends IRL.
 
 All friends will be using the same computer to make their moves.
 
 ### Online Gameplay
+
 Users can play with someone over the internet.
 
 You can choose to play with friends or random people.
 
 ## Contributing
+
 Look at the [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 ## Setup & Run
 
 ### Backend (Spring Boot)
+
 ```bash
 cd Skidadle-backend
 ./gradlew bootRun
 ```
 
 ### Frontend (React + Vite)
+
 ```bash
 cd skidadle-ui
 yarn install
 yarn dev
 ```
+
+## Deployment Environments
+
+Skidadle provides the following deployed environments.
+
+### Production
+
+Frontend:
+
+`https://skidadle.runat.xyz`
+
+Backend:
+
+`https://skidadle.onrender.com/api/skidadle`
+
+### Testing
+
+Frontend:
+
+`https://skidadle-tst.runat.xyz`
+
+Backend:
+
+`https://skidadle-backend.onrender.com/api/skidadle`
