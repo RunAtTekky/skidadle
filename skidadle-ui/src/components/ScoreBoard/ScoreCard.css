@@ -16,8 +16,14 @@
   transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
+.score-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .score-card h2 {
-  margin: 0 0 12px;
+  margin: 0;
   font-size: 45px;
 }
 
@@ -26,7 +32,13 @@
   font-size: 40px;
 }
 
-.score-card-active{
+.score-card-status {
+  font-size: 20px;
+  color: #facc15;
+  font-weight: bold;
+}
+
+.score-card-active {
   border: 2px solid #facc15;
   box-shadow: 0 0 18px rgba(250, 204, 21, 0.75);
   transform: scale(1.04);
