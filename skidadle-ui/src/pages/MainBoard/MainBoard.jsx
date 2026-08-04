@@ -36,6 +36,16 @@ function MainBoard({ board, user1, user2 }) {
     [user2.id]: user2.totalScore,
   });
 
+  const isGameOver = boardState.every((cell) => cell !== "");
+
+  const isDraw =
+    isGameOver && scores[user1.id] === scores[user2.id];
+
+  const winnerId =
+    isGameOver && !isDraw
+      ? (scores[user1.id] > scores[user2.id] ? user1.id : user2.id)
+      : null;
+
   return (
     <div className="main-board">
       <div className="board-container">
@@ -44,6 +54,8 @@ function MainBoard({ board, user1, user2 }) {
             label="Player 1"
             score={scores[user1.id]}
             isActive={currentUser.id === user1.id}
+            isWinner={winnerId === user1.id}
+            isDraw={isDraw}
           />
         </div>
 
@@ -112,6 +124,8 @@ function MainBoard({ board, user1, user2 }) {
             label="Player 2"
             score={scores[user2.id]}
             isActive={currentUser.id === user2.id}
+            isWinner={winnerId === user2.id}
+            isDraw={isDraw}
           />
         </div>
       </div>
