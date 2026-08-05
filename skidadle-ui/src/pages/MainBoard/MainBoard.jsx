@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import _get from "lodash/get";
 import ScoreCard from "../../components/ScoreBoard/ScoreCard";
 import "./MainBoard.css";
@@ -35,16 +35,35 @@ function MainBoard({ board, user1, user2 }) {
     [user1.id]: user1.totalScore,
     [user2.id]: user2.totalScore,
   });
+  const inputRefs = useRef([]);
 
   const isGameOver = boardState.every((cell) => cell !== "");
 
-  const isDraw =
-    isGameOver && scores[user1.id] === scores[user2.id];
+  const isDraw = isGameOver && scores[user1.id] === scores[user2.id];
 
   const winnerId =
     isGameOver && !isDraw
-      ? (scores[user1.id] > scores[user2.id] ? user1.id : user2.id)
+      ? scores[user1.id] > scores[user2.id]
+        ? user1.id
+        : user2.id
       : null;
+
+  const moveToNextEmptyCell = (index, rowStep, colStep) => {
+    let nextRow = Math.floor(index / col) + rowStep;
+    let nextCol = (index % col) + colStep;
+
+    while (nextRow >= 0 && nextRow < row && nextCol >= 0 && nextCol < col) {
+      const nextIndex = nextRow * col + nextCol;
+
+      if (boardState[nextIndex] === "") {
+        inputRefs.current[nextIndex]?.focus();
+        return;
+      }
+
+      nextRow += rowStep;
+      nextCol += colStep;
+    }
+  };
 
   return (
     <div className="main-board">
@@ -80,6 +99,9 @@ function MainBoard({ board, user1, user2 }) {
 
             return (
               <input
+                ref={(element) => {
+                  inputRefs.current[index] = element;
+                }}
                 key={index}
                 className={`board-cell ${isHighlighted ? "highlighted-cell" : ""}`}
                 type="text"
@@ -107,11 +129,34 @@ function MainBoard({ board, user1, user2 }) {
                   )
                 }
                 onKeyDown={(e) => {
-                  if (
-                    e.key.length === 1 &&
-                    !SINGLE_ALPHABET_CHARACTER_REGEX.test(e.key)
-                  ) {
-                    e.preventDefault();
+                  switch (e.key) {
+                    case "ArrowLeft":
+                      e.preventDefault();
+                      moveToNextEmptyCell(index, 0, -1);
+                      return;
+
+                    case "ArrowRight":
+                      e.preventDefault();
+                      moveToNextEmptyCell(index, 0, 1);
+                      return;
+
+                    case "ArrowUp":
+                      e.preventDefault();
+                      moveToNextEmptyCell(index, -1, 0);
+                      return;
+
+                    case "ArrowDown":
+                      e.preventDefault();
+                      moveToNextEmptyCell(index, 1, 0);
+                      return;
+
+                    default:
+                      if (
+                        e.key.length === 1 &&
+                        !SINGLE_ALPHABET_CHARACTER_REGEX.test(e.key)
+                      ) {
+                        e.preventDefault();
+                      }
                   }
                 }}
               />
