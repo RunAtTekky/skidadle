@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { moveToNextEmptyCell } from "./MainBoard.navigation";
 import _get from "lodash/get";
 import ScoreCard from "../../components/ScoreBoard/ScoreCard";
 import "./MainBoard.css";
@@ -47,23 +48,6 @@ function MainBoard({ board, user1, user2 }) {
         ? user1.id
         : user2.id
       : null;
-
-  const moveToNextEmptyCell = (index, rowStep, colStep) => {
-    let nextRow = Math.floor(index / col) + rowStep;
-    let nextCol = (index % col) + colStep;
-
-    while (nextRow >= 0 && nextRow < row && nextCol >= 0 && nextCol < col) {
-      const nextIndex = nextRow * col + nextCol;
-
-      if (boardState[nextIndex] === "") {
-        inputRefs.current[nextIndex]?.focus();
-        return;
-      }
-
-      nextRow += rowStep;
-      nextCol += colStep;
-    }
-  };
 
   return (
     <div className="main-board">
@@ -132,22 +116,54 @@ function MainBoard({ board, user1, user2 }) {
                   switch (e.key) {
                     case "ArrowLeft":
                       e.preventDefault();
-                      moveToNextEmptyCell(index, 0, -1);
+                      moveToNextEmptyCell(
+                        index,
+                        0,
+                        -1,
+                        row,
+                        col,
+                        boardState,
+                        inputRefs,
+                      );
                       return;
 
                     case "ArrowRight":
                       e.preventDefault();
-                      moveToNextEmptyCell(index, 0, 1);
+                      moveToNextEmptyCell(
+                        index,
+                        0,
+                        1,
+                        row,
+                        col,
+                        boardState,
+                        inputRefs,
+                      );
                       return;
 
                     case "ArrowUp":
                       e.preventDefault();
-                      moveToNextEmptyCell(index, -1, 0);
+                      moveToNextEmptyCell(
+                        index,
+                        -1,
+                        0,
+                        row,
+                        col,
+                        boardState,
+                        inputRefs,
+                      );
                       return;
 
                     case "ArrowDown":
                       e.preventDefault();
-                      moveToNextEmptyCell(index, 1, 0);
+                      moveToNextEmptyCell(
+                        index,
+                        1,
+                        0,
+                        row,
+                        col,
+                        boardState,
+                        inputRefs,
+                      );
                       return;
 
                     default:
