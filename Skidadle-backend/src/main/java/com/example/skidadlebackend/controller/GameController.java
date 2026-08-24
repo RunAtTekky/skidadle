@@ -6,19 +6,15 @@ import com.example.skidadlebackend.model.dto.request.PlaceTileRequest;
 import com.example.skidadlebackend.model.dto.response.*;
 import com.example.skidadlebackend.model.enums.ResponseStatus;
 import com.example.skidadlebackend.services.GameService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/skidadle")
+@RequiredArgsConstructor
 public class GameController {
     private final GameService gameService;
     private GameState gameState;
-
-    @Autowired
-    public GameController(GameService gameService) {
-        this.gameService = gameService;
-    }
 
     @GetMapping("/welcome")
     public HelloResponse hello() {
