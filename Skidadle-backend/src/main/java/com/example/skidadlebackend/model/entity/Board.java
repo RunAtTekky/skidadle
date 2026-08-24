@@ -1,5 +1,6 @@
-package com.example.skidadlebackend.model;
+package com.example.skidadlebackend.model.entity;
 
+import com.example.skidadlebackend.model.Position;
 import lombok.Getter;
 
 import java.util.concurrent.atomic.AtomicInteger;

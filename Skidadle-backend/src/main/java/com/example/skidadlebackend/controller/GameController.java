@@ -1,7 +1,10 @@
 package com.example.skidadlebackend.controller;
 
 import com.example.skidadlebackend.model.*;
-import com.example.skidadlebackend.model.ResponseStatus;
+import com.example.skidadlebackend.model.dto.request.InitRequest;
+import com.example.skidadlebackend.model.dto.request.PlaceTileRequest;
+import com.example.skidadlebackend.model.dto.response.*;
+import com.example.skidadlebackend.model.enums.ResponseStatus;
 import com.example.skidadlebackend.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

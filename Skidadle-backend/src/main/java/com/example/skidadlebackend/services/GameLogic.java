@@ -1,6 +1,7 @@
 package com.example.skidadlebackend.services;
 
 import com.example.skidadlebackend.model.*;
+import com.example.skidadlebackend.model.entity.Board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

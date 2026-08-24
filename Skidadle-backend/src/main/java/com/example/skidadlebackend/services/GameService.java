@@ -1,6 +1,14 @@
 package com.example.skidadlebackend.services;
 
 import com.example.skidadlebackend.model.*;
+import com.example.skidadlebackend.model.dto.request.InitRequest;
+import com.example.skidadlebackend.model.dto.request.PlaceTileRequest;
+import com.example.skidadlebackend.model.dto.response.BoardResponse;
+import com.example.skidadlebackend.model.dto.response.GameResponse;
+import com.example.skidadlebackend.model.dto.response.InitResponse;
+import com.example.skidadlebackend.model.dto.response.UserResponse;
+import com.example.skidadlebackend.model.entity.User;
+import com.example.skidadlebackend.model.enums.ResponseStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
