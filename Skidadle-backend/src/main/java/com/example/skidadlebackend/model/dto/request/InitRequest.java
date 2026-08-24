@@ -1,4 +1,4 @@
-package com.example.skidadlebackend.model;
+package com.example.skidadlebackend.model.dto.request;
 
 import lombok.Value;
 

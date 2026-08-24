@@ -1,5 +1,7 @@
 package com.example.skidadlebackend.model;
 
+import com.example.skidadlebackend.model.entity.Board;
+import com.example.skidadlebackend.model.entity.User;
 import lombok.Getter;
 
 @Getter

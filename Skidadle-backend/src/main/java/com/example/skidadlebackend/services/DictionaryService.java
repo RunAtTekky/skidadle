@@ -16,7 +16,7 @@ public class DictionaryService {
     private Set<String> possibleWords;
 
     @PostConstruct
-    public void loodWords() {
+    public void loadWords() {
         possibleWords = new HashSet<>();
 
         try {
