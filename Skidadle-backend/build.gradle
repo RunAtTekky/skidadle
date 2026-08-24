@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '4.1.0'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.diffplug.spotless' version '8.10.0'
 }
 
 group = 'com.example'
@@ -11,6 +12,18 @@ description = 'Skidadle-backend'
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+spotless {
+    java {
+        target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
+
+        googleJavaFormat()
+
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
     }
 }
 

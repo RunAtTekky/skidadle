@@ -6,11 +6,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CellRange {
-    private int start;
-    private int end;
-    private String text;
+  private int start;
+  private int end;
+  private String text;
 
-    public int getLength() {
-        return text.length();
-    }
+  public int getLength() {
+    return text.length();
+  }
 }
