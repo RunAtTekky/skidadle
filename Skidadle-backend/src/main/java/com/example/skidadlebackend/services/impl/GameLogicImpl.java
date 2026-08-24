@@ -2,7 +2,6 @@ package com.example.skidadlebackend.services.impl;
 
 import com.example.skidadlebackend.model.*;
 import com.example.skidadlebackend.model.entity.Board;
-import com.example.skidadlebackend.services.DictionaryService;
 import com.example.skidadlebackend.services.GameLogic;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class GameLogicImpl implements GameLogic {
     public static final int MAX_ROWS = 20;
     public static final int MAX_COLS = 20;
 
-    private final DictionaryService dictionaryService;
+    private final DictionaryServiceImpl dictionaryService;
 
     @Override
     public boolean isUserTurn(GameState gs, int id) {
