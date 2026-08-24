@@ -9,7 +9,6 @@ import com.example.skidadlebackend.model.dto.response.InitResponse;
 import com.example.skidadlebackend.model.dto.response.UserResponse;
 import com.example.skidadlebackend.model.entity.User;
 import com.example.skidadlebackend.model.enums.ResponseStatus;
-import com.example.skidadlebackend.services.GameLogic;
 import com.example.skidadlebackend.services.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class GameServiceImpl implements GameService {
-    private final GameLogic gameLogic;
+    private final GameLogicImpl gameLogic;
 
     @Override
     public GameResponse placeTile(GameState gameState, PlaceTileRequest placeTileRequest) {
@@ -59,7 +58,7 @@ public class GameServiceImpl implements GameService {
     @Override
     public InitResponse initiateGame(GameState gameState, InitRequest initRequest) {
         if (!gameLogic.canCreateBoard(initRequest.getRow(), initRequest.getCol())) {
-            String errorMsg = String.format("MAX_ROWS = %d, MAX_COLS = %d", GameLogic.MAX_ROWS, GameLogic.MAX_COLS);
+            String errorMsg = String.format("MAX_ROWS = %d, MAX_COLS = %d", GameLogicImpl.MAX_ROWS, GameLogicImpl.MAX_COLS);
             return InitResponse.builder()
                     .error(errorMsg)
                     .status(ResponseStatus.ERROR)
