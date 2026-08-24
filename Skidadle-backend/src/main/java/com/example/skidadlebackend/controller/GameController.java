@@ -13,37 +13,36 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/skidadle")
 @RequiredArgsConstructor
 public class GameController {
-    private final GameService gameService;
-    private GameState gameState;
+  private final GameService gameService;
+  private GameState gameState;
 
-    @GetMapping("/welcome")
-    public HelloResponse hello() {
-        return HelloResponse.builder()
-                .greeting("Welcome to Skidadle")
-                .status(ResponseStatus.SUCCESS)
-                .build();
-    }
+  @GetMapping("/welcome")
+  public HelloResponse hello() {
+    return HelloResponse.builder()
+        .greeting("Welcome to Skidadle")
+        .status(ResponseStatus.SUCCESS)
+        .build();
+  }
 
-    @PostMapping("/init")
-    public InitResponse initiateGame(@RequestBody InitRequest initRequest) {
-        gameState = new GameState(initRequest.getRow(), initRequest.getCol());
+  @PostMapping("/init")
+  public InitResponse initiateGame(@RequestBody InitRequest initRequest) {
+    gameState = new GameState(initRequest.getRow(), initRequest.getCol());
 
-        return gameService.initiateGame(gameState, initRequest);
-    }
+    return gameService.initiateGame(gameState, initRequest);
+  }
 
-    @PostMapping("/place-tile")
-    public GameResponse placeTile(@RequestBody PlaceTileRequest placeTileRequest) {
-        return gameService.placeTile(gameState, placeTileRequest);
-    }
+  @PostMapping("/place-tile")
+  public GameResponse placeTile(@RequestBody PlaceTileRequest placeTileRequest) {
+    return gameService.placeTile(gameState, placeTileRequest);
+  }
 
-    @PostMapping("/board")
-    public BoardResponse getBoard() {
-        return gameService.getBoard(gameState);
-    }
+  @PostMapping("/board")
+  public BoardResponse getBoard() {
+    return gameService.getBoard(gameState);
+  }
 
-    @GetMapping("/get-score")
-    public UserResponse getScore(@RequestParam int id) {
-        return gameService.getUserScore(gameState, id);
-    }
-
+  @GetMapping("/get-score")
+  public UserResponse getScore(@RequestParam int id) {
+    return gameService.getUserScore(gameState, id);
+  }
 }

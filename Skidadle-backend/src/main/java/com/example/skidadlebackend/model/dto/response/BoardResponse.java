@@ -8,7 +8,7 @@ import lombok.Value;
 @Value
 @Builder
 public class BoardResponse {
-    Board board;
-    String error;
-    ResponseStatus status;
+  Board board;
+  String error;
+  ResponseStatus status;
 }

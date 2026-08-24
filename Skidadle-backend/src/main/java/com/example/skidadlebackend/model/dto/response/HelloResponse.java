@@ -7,6 +7,6 @@ import lombok.Value;
 @Value
 @Builder
 public class HelloResponse {
-    String greeting;
-    ResponseStatus status;
+  String greeting;
+  ResponseStatus status;
 }

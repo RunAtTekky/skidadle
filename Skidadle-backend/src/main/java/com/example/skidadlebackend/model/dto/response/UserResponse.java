@@ -7,8 +7,8 @@ import lombok.Value;
 @Value
 @Builder
 public class UserResponse {
-    int id;
-    int boardId;
-    int score;
-    ResponseStatus status;
+  int id;
+  int boardId;
+  int score;
+  ResponseStatus status;
 }
