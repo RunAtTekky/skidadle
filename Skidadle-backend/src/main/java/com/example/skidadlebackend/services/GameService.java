@@ -1,103 +1,19 @@
 package com.example.skidadlebackend.services;
 
-import com.example.skidadlebackend.model.*;
+import com.example.skidadlebackend.model.GameState;
 import com.example.skidadlebackend.model.dto.request.InitRequest;
 import com.example.skidadlebackend.model.dto.request.PlaceTileRequest;
 import com.example.skidadlebackend.model.dto.response.BoardResponse;
 import com.example.skidadlebackend.model.dto.response.GameResponse;
 import com.example.skidadlebackend.model.dto.response.InitResponse;
 import com.example.skidadlebackend.model.dto.response.UserResponse;
-import com.example.skidadlebackend.model.entity.User;
-import com.example.skidadlebackend.model.enums.ResponseStatus;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class GameService {
-    private final GameLogic gameLogic;
+public interface GameService {
+  GameResponse placeTile(GameState gameState, PlaceTileRequest placeTileRequest);
 
-    @Autowired
-    public GameService(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
-    }
+  InitResponse initiateGame(GameState gameState, InitRequest initRequest);
 
-    public GameResponse placeTile(GameState gameState, PlaceTileRequest placeTileRequest) {
-        int id = placeTileRequest.getId();
-        int row = placeTileRequest.getRow();
-        int col = placeTileRequest.getCol();
-        char ch = placeTileRequest.getCh();
+  BoardResponse getBoard(GameState gameState);
 
-        if (!gameLogic.isUserTurn(gameState, id)) {
-            return GameResponse.builder()
-                    .error("Not users turn")
-                    .status(ResponseStatus.ERROR)
-                    .build();
-        }
-
-        boolean isValid = gameLogic.validateCell(gameState, row, col, ch);
-
-        if (!isValid) {
-            return GameResponse.builder()
-                    .canPlace(false)
-                    .error("Invalid cell")
-                    .status(ResponseStatus.ERROR)
-                    .build();
-        }
-
-        Position[] cellsMarked = gameLogic.markCellAndGetHighlightedCells(gameState, row, col, ch);
-
-        gameState.changeTurn();
-
-        return GameResponse.builder()
-                .canPlace(true)
-                .highlightedCells(cellsMarked)
-                .score(cellsMarked.length)
-                .error("")
-                .status(ResponseStatus.SUCCESS)
-                .build();
-    }
-
-    public InitResponse initiateGame(GameState gameState, InitRequest initRequest) {
-        if (!gameLogic.canCreateBoard(initRequest.getRow(), initRequest.getCol())) {
-            String errorMsg = String.format("MAX_ROWS = %d, MAX_COLS = %d", GameLogic.MAX_ROWS, GameLogic.MAX_COLS);
-            return InitResponse.builder()
-                    .error(errorMsg)
-                    .status(ResponseStatus.ERROR)
-                    .build();
-        }
-
-        return InitResponse.builder()
-                .board(gameState.getBoard())
-                .user1(gameState.getUser1())
-                .user2(gameState.getUser2())
-                .status(ResponseStatus.SUCCESS)
-                .build();
-    }
-
-    public BoardResponse getBoard(GameState gameState) {
-        if (gameState == null) {
-            return BoardResponse
-                    .builder()
-                    .error("Game has not been initialized. Cannot return board.")
-                    .status(ResponseStatus.ERROR)
-                    .build();
-        }
-
-        return BoardResponse
-                .builder()
-                .board(gameState.getBoard())
-                .status(ResponseStatus.SUCCESS)
-                .build();
-    }
-
-    public UserResponse getUserScore(GameState gameState, int id) {
-        User user = gameState.getUser(id);
-
-        return UserResponse.builder()
-                .id(user.getId())
-                .boardId(user.getBoardId())
-                .score(user.getTotalScore())
-                .status(ResponseStatus.SUCCESS)
-                .build();
-    }
+  UserResponse getUserScore(GameState gameState, int id);
 }
