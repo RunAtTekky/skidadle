@@ -1,13 +1,20 @@
 package com.example.skidadlebackend.services.impl;
 
 import com.example.skidadlebackend.model.*;
+import com.example.skidadlebackend.model.dto.response.GameResponse;
 import com.example.skidadlebackend.model.entity.Board;
+import com.example.skidadlebackend.model.enums.ResponseStatus;
 import com.example.skidadlebackend.services.GameLogic;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GameLogicImpl implements GameLogic {
@@ -27,7 +34,7 @@ public class GameLogicImpl implements GameLogic {
   }
 
   @Override
-  public Position[] markCellAndGetHighlightedCells(GameState gs, int row, int col, char ch) {
+  public GameResponse markCellAndGetHighlightedCells(GameState gs, int row, int col, char ch) {
     gs.getBoard().set(row, col, ch);
 
     CellRange horizontalSS = horizontalSearchSpace(gs, row, col, ch);
@@ -41,7 +48,25 @@ public class GameLogicImpl implements GameLogic {
 
     gs.getCurrentUserTurn().addScore(scoreGained);
 
-    return getMarkedCells(largestHorizontalWord, largestVerticalWord, row, col);
+    Position[] cellsMarked = getMarkedCells(largestHorizontalWord, largestVerticalWord, row, col);
+
+    List<String> formedWords = new ArrayList<>();
+    if (largestHorizontalWord.getLength() > 1) {
+      formedWords.add(largestHorizontalWord.getText());
+    }
+
+    if (largestVerticalWord.getLength() > 1) {
+      formedWords.add(largestVerticalWord.getText());
+    }
+
+    return GameResponse.builder()
+            .canPlace(true)
+            .highlightedCells(cellsMarked)
+            .score(cellsMarked.length)
+            .error("")
+            .formedWords(formedWords)
+            .status(ResponseStatus.SUCCESS)
+            .build();
   }
 
   @Override
