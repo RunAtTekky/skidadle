@@ -5,7 +5,6 @@ import com.example.skidadlebackend.model.dto.response.GameResponse;
 import com.example.skidadlebackend.model.entity.Board;
 import com.example.skidadlebackend.model.enums.ResponseStatus;
 import com.example.skidadlebackend.services.GameLogic;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -60,13 +59,13 @@ public class GameLogicImpl implements GameLogic {
     }
 
     return GameResponse.builder()
-            .canPlace(true)
-            .highlightedCells(cellsMarked)
-            .score(cellsMarked.length)
-            .error("")
-            .formedWords(formedWords)
-            .status(ResponseStatus.SUCCESS)
-            .build();
+        .canPlace(true)
+        .highlightedCells(cellsMarked)
+        .score(cellsMarked.length)
+        .error("")
+        .formedWords(formedWords)
+        .status(ResponseStatus.SUCCESS)
+        .build();
   }
 
   @Override

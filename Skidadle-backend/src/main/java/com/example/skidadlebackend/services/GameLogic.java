@@ -2,7 +2,6 @@ package com.example.skidadlebackend.services;
 
 import com.example.skidadlebackend.model.CellRange;
 import com.example.skidadlebackend.model.GameState;
-import com.example.skidadlebackend.model.Position;
 import com.example.skidadlebackend.model.dto.response.GameResponse;
 
 public interface GameLogic {
