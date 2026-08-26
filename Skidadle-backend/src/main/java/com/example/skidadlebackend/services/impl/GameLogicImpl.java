@@ -33,7 +33,7 @@ public class GameLogicImpl implements GameLogic {
   }
 
   @Override
-  public GameResponse markCellAndGetHighlightedCells(GameState gs, int row, int col, char ch) {
+  public GameResponse markCell(GameState gs, int row, int col, char ch) {
     gs.getBoard().set(row, col, ch);
 
     CellRange horizontalSS = horizontalSearchSpace(gs, row, col, ch);

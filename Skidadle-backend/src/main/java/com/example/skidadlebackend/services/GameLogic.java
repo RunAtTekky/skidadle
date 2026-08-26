@@ -9,7 +9,7 @@ public interface GameLogic {
 
   boolean validateCell(GameState gs, int row, int col, char ch);
 
-  GameResponse markCellAndGetHighlightedCells(GameState gs, int row, int col, char ch);
+  GameResponse markCell(GameState gs, int row, int col, char ch);
 
   CellRange horizontalSearchSpace(GameState gs, int row, int col, char ch);
 

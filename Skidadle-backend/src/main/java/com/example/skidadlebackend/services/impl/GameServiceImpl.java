@@ -9,6 +9,7 @@ import com.example.skidadlebackend.model.dto.response.InitResponse;
 import com.example.skidadlebackend.model.dto.response.UserResponse;
 import com.example.skidadlebackend.model.entity.User;
 import com.example.skidadlebackend.model.enums.ResponseStatus;
+import com.example.skidadlebackend.services.GameLogic;
 import com.example.skidadlebackend.services.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class GameServiceImpl implements GameService {
-  private final GameLogicImpl gameLogic;
+  private final GameLogic gameLogic;
 
   @Override
   public GameResponse placeTile(GameState gameState, PlaceTileRequest placeTileRequest) {
@@ -39,7 +40,7 @@ public class GameServiceImpl implements GameService {
           .build();
     }
 
-    GameResponse gameResponse = gameLogic.markCellAndGetHighlightedCells(gameState, row, col, ch);
+    GameResponse gameResponse = gameLogic.markCell(gameState, row, col, ch);
 
     gameState.changeTurn();
 
