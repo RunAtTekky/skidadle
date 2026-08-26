@@ -5,6 +5,8 @@ import com.example.skidadlebackend.model.enums.ResponseStatus;
 import lombok.Builder;
 import lombok.Value;
 
+import java.util.List;
+
 @Value
 @Builder
 public class GameResponse {
@@ -12,5 +14,6 @@ public class GameResponse {
   Position[] highlightedCells;
   int score;
   String error;
+  List<String> formedWords;
   ResponseStatus status;
 }

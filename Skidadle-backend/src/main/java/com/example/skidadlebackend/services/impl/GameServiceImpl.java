@@ -39,17 +39,11 @@ public class GameServiceImpl implements GameService {
           .build();
     }
 
-    Position[] cellsMarked = gameLogic.markCellAndGetHighlightedCells(gameState, row, col, ch);
+    GameResponse gameResponse = gameLogic.markCellAndGetHighlightedCells(gameState, row, col, ch);
 
     gameState.changeTurn();
 
-    return GameResponse.builder()
-        .canPlace(true)
-        .highlightedCells(cellsMarked)
-        .score(cellsMarked.length)
-        .error("")
-        .status(ResponseStatus.SUCCESS)
-        .build();
+    return gameResponse;
   }
 
   @Override

@@ -3,13 +3,14 @@ package com.example.skidadlebackend.services;
 import com.example.skidadlebackend.model.CellRange;
 import com.example.skidadlebackend.model.GameState;
 import com.example.skidadlebackend.model.Position;
+import com.example.skidadlebackend.model.dto.response.GameResponse;
 
 public interface GameLogic {
   boolean isUserTurn(GameState gs, int id);
 
   boolean validateCell(GameState gs, int row, int col, char ch);
 
-  Position[] markCellAndGetHighlightedCells(GameState gs, int row, int col, char ch);
+  GameResponse markCellAndGetHighlightedCells(GameState gs, int row, int col, char ch);
 
   CellRange horizontalSearchSpace(GameState gs, int row, int col, char ch);
 
