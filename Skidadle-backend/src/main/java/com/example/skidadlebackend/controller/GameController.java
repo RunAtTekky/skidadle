@@ -6,6 +6,7 @@ import com.example.skidadlebackend.model.dto.request.PlaceTileRequest;
 import com.example.skidadlebackend.model.dto.response.*;
 import com.example.skidadlebackend.model.enums.ResponseStatus;
 import com.example.skidadlebackend.services.GameService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +26,14 @@ public class GameController {
   }
 
   @PostMapping("/init")
-  public InitResponse initiateGame(@RequestBody InitRequest initRequest) {
-    gameState = new GameState(initRequest.getRow(), initRequest.getCol());
+  public InitResponse initiateGame(@Valid @RequestBody InitRequest initRequest) {
+    gameState = new GameState(initRequest.row(), initRequest.row());
 
     return gameService.initiateGame(gameState, initRequest);
   }
 
   @PostMapping("/place-tile")
-  public GameResponse placeTile(@RequestBody PlaceTileRequest placeTileRequest) {
+  public GameResponse placeTile(@Valid @RequestBody PlaceTileRequest placeTileRequest) {
     return gameService.placeTile(gameState, placeTileRequest);
   }
 

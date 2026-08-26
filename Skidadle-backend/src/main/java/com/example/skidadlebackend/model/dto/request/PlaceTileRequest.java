@@ -1,12 +1,10 @@
 package com.example.skidadlebackend.model.dto.request;
 
-import lombok.Value;
+import jakarta.validation.constraints.NotNull;
 
-@Value
-public class PlaceTileRequest {
-  int id;
-  int boardId;
-  int row;
-  int col;
-  char ch;
-}
+public record PlaceTileRequest(
+    @NotNull Integer id,
+    @NotNull Integer boardId,
+    @NotNull Integer row,
+    @NotNull Integer col,
+    char ch) {}

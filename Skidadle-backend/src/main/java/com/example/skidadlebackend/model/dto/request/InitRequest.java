@@ -1,9 +1,5 @@
 package com.example.skidadlebackend.model.dto.request;
 
-import lombok.Value;
+import jakarta.validation.constraints.NotNull;
 
-@Value
-public class InitRequest {
-  int row;
-  int col;
-}
+public record InitRequest(@NotNull Integer row, @NotNull Integer col) {}

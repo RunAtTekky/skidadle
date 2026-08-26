@@ -20,10 +20,10 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public GameResponse placeTile(GameState gameState, PlaceTileRequest placeTileRequest) {
-    int id = placeTileRequest.getId();
-    int row = placeTileRequest.getRow();
-    int col = placeTileRequest.getCol();
-    char ch = placeTileRequest.getCh();
+    int id = placeTileRequest.id();
+    int row = placeTileRequest.row();
+    int col = placeTileRequest.col();
+    char ch = placeTileRequest.ch();
 
     if (!gameLogic.isUserTurn(gameState, id)) {
       return GameResponse.builder().error("Not users turn").status(ResponseStatus.ERROR).build();
@@ -48,7 +48,7 @@ public class GameServiceImpl implements GameService {
 
   @Override
   public InitResponse initiateGame(GameState gameState, InitRequest initRequest) {
-    if (!gameLogic.canCreateBoard(initRequest.getRow(), initRequest.getCol())) {
+    if (!gameLogic.canCreateBoard(initRequest.row(), initRequest.col())) {
       String errorMsg =
           String.format(
               "MAX_ROWS = %d, MAX_COLS = %d", GameLogicImpl.MAX_ROWS, GameLogicImpl.MAX_COLS);
